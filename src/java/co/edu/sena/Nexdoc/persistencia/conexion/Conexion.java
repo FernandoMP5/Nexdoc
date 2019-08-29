@@ -1,5 +1,5 @@
 
-package co.edu.sena.Nexdoc.persistensia.conexion;
+package co.edu.sena.Nexdoc.persistencia.conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ public class Conexion {
     public static Connection conectar() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nexdoc", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nexdoc", "root", "moreno");
             return con;
         } catch (Exception e) {
             e.printStackTrace();

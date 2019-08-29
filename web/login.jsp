@@ -17,7 +17,7 @@
             <div class="wrapper fadeInDown">
                 <div id="formContent"><br>
                     <img src="img/Encabezado.png" width="366px" height="150px">
-                    <form action="ControladorFuncionario" method="post">
+                    <form action="ControladorPersona" method="post">
                         <input type="text" name="txtusuario" placeholder="Usuario" autocomplete="off">
                         <input type="password" name="txtclave" placeholder="Contraseña">
                         <br>

@@ -1,8 +1,7 @@
 /** @author Sena */
-package co.edu.sena.Nexdoc.persistensia.dao;
+package co.edu.sena.Nexdoc.persistencia.dao;
 
-import co.edu.sena.Nexdoc.persistensia.vo.documentoVO;
-import co.edu.sena.Nexdoc.persistensia.vo.historialVO;
+import co.edu.sena.Nexdoc.persistencia.vo.historialVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,7 @@ public class historialDAO {
     PreparedStatement ps;
     ResultSet rs;
     private String sql = "";
-    private ArrayList<documentoVO> lista = new ArrayList<>();
+    private final ArrayList<historialVO> lista = new ArrayList<>();
 
     public historialDAO(Connection con) {
         this.con = con;

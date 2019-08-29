@@ -1,5 +1,5 @@
 /** @author Sena*/
-package co.edu.sena.Nexdoc.persistensia.vo;
+package co.edu.sena.Nexdoc.persistencia.vo;
 
 import java.io.InputStream;
 import java.sql.Date;
@@ -8,14 +8,14 @@ import java.sql.Date;
 public class documentoVO {
     
     private int idDocumento;
-    private byte[] documentoPDF;
-    private InputStream documentoPDFmostrar;
+    private InputStream documentoPDF;
+    private byte[] documentoPDFmostrar;
     private int visualizaciones;
     private String idRemitente;
     private String idDestinatario;
     private String idRecepcionista;
-    private byte[] respuestaPDF;
-    private InputStream respuestaPDFmostrar;
+    private InputStream respuestaPDF;
+    private byte[] respuestaPDFmostrar;
     private String respuestaComen;
     private int idEstado;
     private int idPrioridad;
@@ -26,6 +26,22 @@ public class documentoVO {
     public documentoVO() {
     }
 
+    public documentoVO(int idDocumento, byte[] documentoPDFmostrar, int visualizaciones, String idRemitente, String idDestinatario, String idRecepcionista, byte[] respuestaPDFmostrar, String respuestaComen, int idEstado, int idPrioridad, Date fechaRadicacion, int idOficina, int idtipoDocumento) {
+        this.idDocumento = idDocumento;
+        this.documentoPDFmostrar = documentoPDFmostrar;
+        this.visualizaciones = visualizaciones;
+        this.idRemitente = idRemitente;
+        this.idDestinatario = idDestinatario;
+        this.idRecepcionista = idRecepcionista;
+        this.respuestaPDFmostrar = respuestaPDFmostrar;
+        this.respuestaComen = respuestaComen;
+        this.idEstado = idEstado;
+        this.idPrioridad = idPrioridad;
+        this.fechaRadicacion = fechaRadicacion;
+        this.idOficina = idOficina;
+        this.idtipoDocumento = idtipoDocumento;
+    }
+
     public int getIdDocumento() {
         return idDocumento;
     }
@@ -34,20 +50,20 @@ public class documentoVO {
         this.idDocumento = idDocumento;
     }
 
-    public byte[] getDocumentoPDF() {
-        return documentoPDF;
-    }
-
-    public void setDocumentoPDF(byte[] documentoPDF) {
-        this.documentoPDF = documentoPDF;
-    }
-
-    public InputStream getDocumentoPDFmostrar() {
+    public byte[] getDocumentoPDFmostrar() {
         return documentoPDFmostrar;
     }
 
-    public void setDocumentoPDFmostrar(InputStream documentoPDFmostrar) {
+    public void setDocumentoPDFmostrar(byte[] documentoPDFmostrar) {
         this.documentoPDFmostrar = documentoPDFmostrar;
+    }
+
+    public InputStream getDocumentoPDF() {
+        return documentoPDF;
+    }
+
+    public void setDocumentoPDF(InputStream documentoPDF) {
+        this.documentoPDF = documentoPDF;
     }
 
     public int getVisualizaciones() {
@@ -82,20 +98,20 @@ public class documentoVO {
         this.idRecepcionista = idRecepcionista;
     }
 
-    public byte[] getRespuestaPDF() {
-        return respuestaPDF;
-    }
-
-    public void setRespuestaPDF(byte[] respuestaPDF) {
-        this.respuestaPDF = respuestaPDF;
-    }
-
-    public InputStream getRespuestaPDFmostrar() {
+    public byte[] getRespuestaPDFmostrar() {
         return respuestaPDFmostrar;
     }
 
-    public void setRespuestaPDFmostrar(InputStream respuestaPDFmostrar) {
+    public void setRespuestaPDFmostrar(byte[] respuestaPDFmostrar) {
         this.respuestaPDFmostrar = respuestaPDFmostrar;
+    }
+
+    public InputStream getRespuestaPDF() {
+        return respuestaPDF;
+    }
+
+    public void setRespuestaPDFmostrar(InputStream respuestaPDF) {
+        this.respuestaPDF = respuestaPDF;
     }
 
     public String getRespuestaComen() {

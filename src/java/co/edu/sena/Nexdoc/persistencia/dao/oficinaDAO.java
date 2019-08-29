@@ -1,8 +1,7 @@
 /** @author Sena */
-package co.edu.sena.Nexdoc.persistensia.dao;
+package co.edu.sena.Nexdoc.persistencia.dao;
 
-import co.edu.sena.Nexdoc.persistensia.conexion.Conexion;
-import co.edu.sena.Nexdoc.persistensia.vo.documentoVO;
+import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
 import co.edu.sena.Nexdoc.persistensia.vo.oficinaVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

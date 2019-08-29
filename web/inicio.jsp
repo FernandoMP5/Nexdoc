@@ -5,13 +5,15 @@
 --%>
 
 <%@page import="java.util.Iterator"%>
-<%@page import="co.edu.sena.Nexdoc.persistensia.conexion.Conexion"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%> 
 <%@page import="java.util.List"%>
-<%@page import="co.edu.sena.Nexdoc.persistensia.dao.Tipo_DocumentoDAO"%>
-<%@page import="co.edu.sena.Nexdoc.persistensia.vo.Tipo_Documento"%>
-<%@page import="co.edu.sena.Nexdoc.persistensia.dao.OficinaDAO"%>
-<%@page import="co.edu.sena.Nexdoc.persistensia.vo.Oficina"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.dao.tipoDocumentoDAO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.dao.oficinaDAO"%>
+<%@page import="co.edu.sena.Nexdoc.persistensia.vo.tipoDocumentoVO"%>
+<%@page import="co.edu.sena.Nexdoc.persistensia.vo.oficinaVO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -91,7 +93,7 @@
 </html>
 <div class="modal fade" id="Radicar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" id="modal2R">
-        <form action="ControladorDocumento">
+        <form action="ControladorDocumento" method="post" enctype="multipart/form-data">
             <div class="modal-content"><br>
                 <div class="modal-body"><br>
                     <h1>Radicar Documento</h1><br>
@@ -101,35 +103,41 @@
                     <select class="texto1" name="cbotipodocumento">
                         <%
                             Conexion cn = new Conexion();
-                            Tipo_DocumentoDAO Tipo_DocumentoDAO = new Tipo_DocumentoDAO(cn.conectar());
-                            List<Tipo_Documento> listarTipo_Documento = Tipo_DocumentoDAO.listarTipoDoc();
-                            Iterator<Tipo_Documento> iteraTipo_Documento = listarTipo_Documento.iterator();
-                            Tipo_Documento Tipo_Documento = null;
-                            while (iteraTipo_Documento.hasNext()) {
-                                Tipo_Documento = iteraTipo_Documento.next();
+                            tipoDocumentoDAO tipoDocumentoDAO = new tipoDocumentoDAO(cn.conectar());
+                            List<tipoDocumentoVO> listartipoDocumento = tipoDocumentoDAO.listartipoDoc();
+                            Iterator<tipoDocumentoVO> iteratipoDocumento = listartipoDocumento.iterator();
+                            tipoDocumentoVO tipoDocumentoVO = null;
+                            while (iteratipoDocumento.hasNext()) {
+                                tipoDocumentoVO = iteratipoDocumento.next();
                         %>
-                        <option value="<%=Tipo_Documento.getIdTipo_Documento()%>"><%=Tipo_Documento.getDescripcion()%></option>
+                        <option value="<%=tipoDocumentoVO.getIdtipoDocumento()%>"><%=tipoDocumentoVO.getDescripcion()%></option>
                         <%}%>
                     </select><br/>
                     <label>Oficina</label><br/>
                     <select class="texto1" name="cbooficina">
                         <%
-                            OficinaDAO OficinaDAO = new OficinaDAO(cn.conectar());
-                            List<Oficina> listarOficina = OficinaDAO.listar();
-                            Iterator<Oficina> iteraOficina = listarOficina.iterator();
-                            Oficina Oficina = null;
-                            while (iteraOficina.hasNext()) {
-                                Oficina = iteraOficina.next();
+                            oficinaDAO oficinaDAO = new oficinaDAO(cn.conectar());
+                            List<oficinaVO> listaroficina = oficinaDAO.listarOficina();
+                            Iterator<oficinaVO> iteraoficinaVO = listaroficina.iterator();
+                            oficinaVO oficinaVO = null;
+                            while (iteraoficinaVO.hasNext()) {
+                                oficinaVO = iteraoficinaVO.next();
                         %>
-                        <option value="<%=Oficina.getIdOficina()%>"><%=Oficina.getNombre()%></option>
+                        <option value="<%=oficinaVO.getIdOficina()%>"><%=oficinaVO.getNombreOficina()%></option> 
                         <%}%>
                     </select><br/>
                     <label>Destinatario</label><br/>
-                    <select>
-                        <option></option>
-                    </select>
+                    <select name="cbodestinatario">
+                        <option value="1">Manuel Sebastian</option>
+                    </select><br/>
+                    <label>Nivel de Prioridad</label></br>
+                    <div class="radio">
+                        <input type="radio" name="rbprioridad" value="1"/> Prueba</br>
+                        <input type="radio" name="rbprioridad" value="2"/> Prueba</br>
+                        <input type="radio" name="rbprioridad" value="3"/> Prueba</br>
+                    </div>
                     <input type="file" name="documento"><br><br>
-                    <input type="submit" value="Radicar" name="accion">
+                    <input type="submit" value="Radicar Documento" name="accion">
                 </div>
             </div>
         </form>

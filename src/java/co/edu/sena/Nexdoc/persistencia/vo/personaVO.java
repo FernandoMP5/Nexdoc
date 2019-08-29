@@ -1,5 +1,5 @@
 /** @author Sena*/
-package co.edu.sena.Nexdoc.persistensia.vo;
+package co.edu.sena.Nexdoc.persistencia.vo;
 
 
 public class personaVO {
@@ -13,6 +13,9 @@ public class personaVO {
     private double telefonoCelular;
     private String direccion;
     private int rol;
+    private String usuario;
+    private String clave;
+    private int oficina;
 
     public personaVO() {
     }
@@ -87,6 +90,30 @@ public class personaVO {
 
     public void setRol(int rol) {
         this.rol = rol;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public int getOficina() {
+        return oficina;
+    }
+
+    public void setOficina(int oficina) {
+        this.oficina = oficina;
     }
     
 }//fin clase personaVO

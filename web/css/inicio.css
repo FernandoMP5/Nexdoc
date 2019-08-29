@@ -212,7 +212,7 @@ a{
     cursor: pointer;
 }
 #modal2R{
-    margin-top: 5%;
+    margin-top: 80px;;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
@@ -301,4 +301,8 @@ a{
 #modal2R input[type=text]:focus,#modal2R input[type=password]:focus,#modal2R input[type=email]:focus,#modal2 input[type=int]:focus,#modal2R select:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
+}
+#modal2R .radio{
+    float:left;
+    margin-left:90px;
 }

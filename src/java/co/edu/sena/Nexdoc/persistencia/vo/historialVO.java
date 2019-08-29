@@ -1,5 +1,5 @@
 /** @author Sena*/
-package co.edu.sena.Nexdoc.persistensia.vo;
+package co.edu.sena.Nexdoc.persistencia.vo;
 
 import java.io.InputStream;
 import java.sql.Date;
@@ -10,8 +10,8 @@ public class historialVO {
     private int idHistotia;
     private int idDocumento;
     private Date fechaHistoria;
-    private byte[] respuestaPDF;
-    private InputStream respuestaPDFmostrar;
+    private InputStream respuestaPDF;
+    private byte[] respuestaPDFmostrar;
     private String respuestaComen;
     private int idDestinatario;
 
@@ -42,20 +42,20 @@ public class historialVO {
         this.fechaHistoria = fechaHistoria;
     }
 
-    public byte[] getRespuestaPDF() {
-        return respuestaPDF;
-    }
-
-    public void setRespuestaPDF(byte[] respuestaPDF) {
-        this.respuestaPDF = respuestaPDF;
-    }
-
-    public InputStream getRespuestaPDFmostrar() {
+    public byte[] getRespuestaPDFmostrar() {
         return respuestaPDFmostrar;
     }
 
-    public void setRespuestaPDFmostrar(InputStream respuestaPDFmostrar) {
+    public void setRespuestaPDFmostrar(byte[] respuestaPDFmostrar) {
         this.respuestaPDFmostrar = respuestaPDFmostrar;
+    }
+
+    public InputStream getRespuestaPDF() {
+        return respuestaPDF;
+    }
+
+    public void setRespuestaPDFmostrar(InputStream respuestaPDF) {
+        this.respuestaPDF = respuestaPDF;
     }
 
     public String getRespuestaComen() {

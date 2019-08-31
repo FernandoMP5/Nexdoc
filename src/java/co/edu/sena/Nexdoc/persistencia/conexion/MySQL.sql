@@ -1,11 +1,11 @@
-SELECT * FROM funcionario
 SELECT * FROM documento
-SELECT * FROM historial
 SELECT * FROM persona
-SELECT * FROM tipoIdentificacion
+SELECT * FROM historial
 SELECT * FROM rol
 SELECT * FROM prioridad
 SELECT * FROM estado
+SELECT * FROM tipoDocumento
+SELECT * FROM tipoIdentificacion
 SELECT NOW();
 
 INSERT INTO documento(idDocumento,visualizaciones,idRemitente,idDestinatario,idRecepcionista,idEstado,idPrioridad,fechaRadicacion,idOficina,idtipoDocumento)
@@ -30,3 +30,9 @@ INSERT INTO prioridad VALUES (1,'Maxima')
 INSERT INTO tipoDocumento VALUES (2,'Contratos')
 
 INSERT INTO persona VALUES (1000225552,1,'MANUEL SEBASTIAN', 'CARDENAS PASCAGAZA', 'sc260101@gmail.com', 7317299, 3138230477, 'TV 13D ESTE #54-37 SUR',1)
+
+SELECT CONCAT(P.nombre,' ',P.apellido)nombre,P.numeroIdentificacion,P.direccion,P.telefonoFijo,P.telefonoCelular,P.correo,R.descripcion,O.nombreOficina FROM persona P 
+INNER JOIN rol R ON P.rol=R.idRol INNER JOIN oficina O ON O.idOficina=P.oficina
+WHERE P.rol>1
+
+SELECT * FROM persona WHERE rol=1

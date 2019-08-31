@@ -1,119 +1,133 @@
-/** @author Sena*/
+/** @author Sena */
 package co.edu.sena.Nexdoc.persistencia.vo;
-
 
 public class personaVO {
 
-    private String numeroIdentificacion;
-    private int tipoIdentificacion;
-    private String nombre;
-    private String apellido;
-    private String correo;
-    private double telefonoFijo;
-    private double telefonoCelular;
-    private String direccion;
-    private int rol;
-    private String usuario;
-    private String clave;
-    private int oficina;
+  private String numeroIdentificacion;
+  private int tipoIdentificacion;
+  private String nombre;
+  private String apellido;
+  private String correo;
+  private Double telefonoFijo;
+  private Double telefonoCelular;
+  private String direccion;
+  private int rol;
+  private String usuario;
+  private String clave;
+  private int oficina;
 
-    public personaVO() {
-    }
+  public personaVO() {
+  }
 
-    public String getNumeroIdentificacion() {
-        return numeroIdentificacion;
-    }
+  public personaVO(String numeroIdentificacion, int tipoIdentificacion, String nombre, String apellido, String correo, Double telefonoFijo, Double telefonoCelular, String direccion, int rol, String usuario, String clave, int oficina) {
+    this.numeroIdentificacion = numeroIdentificacion;
+    this.tipoIdentificacion = tipoIdentificacion;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.correo = correo;
+    this.telefonoFijo = telefonoFijo;
+    this.telefonoCelular = telefonoCelular;
+    this.direccion = direccion;
+    this.rol = rol;
+    this.usuario = usuario;
+    this.clave = clave;
+    this.oficina = oficina;
+  }
 
-    public void setNumeroIdentificacion(String numeroIdentificacion) {
-        this.numeroIdentificacion = numeroIdentificacion;
-    }
+  public String getNumeroIdentificacion() {
+    return numeroIdentificacion;
+  }
 
-    public int getTipoIdentificacion() {
-        return tipoIdentificacion;
-    }
+  public void setNumeroIdentificacion(String numeroIdentificacion) {
+    this.numeroIdentificacion = numeroIdentificacion;
+  }
 
-    public void setTipoIdentificacion(int tipoIdentificacion) {
-        this.tipoIdentificacion = tipoIdentificacion;
-    }
+  public int getTipoIdentificacion() {
+    return tipoIdentificacion;
+  }
 
-    public String getNombre() {
-        return nombre;
-    }
+  public void setTipoIdentificacion(int tipoIdentificacion) {
+    this.tipoIdentificacion = tipoIdentificacion;
+  }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+  public String getNombre() {
+    return nombre;
+  }
 
-    public String getApellido() {
-        return apellido;
-    }
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+  public String getApellido() {
+    return apellido;
+  }
 
-    public String getCorreo() {
-        return correo;
-    }
+  public void setApellido(String apellido) {
+    this.apellido = apellido;
+  }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+  public String getCorreo() {
+    return correo;
+  }
 
-    public double getTelefonoFijo() {
-        return telefonoFijo;
-    }
+  public void setCorreo(String correo) {
+    this.correo = correo;
+  }
 
-    public void setTelefonoFijo(double telefonoFijo) {
-        this.telefonoFijo = telefonoFijo;
-    }
+  public Double getTelefonoFijo() {
+    return telefonoFijo;
+  }
 
-    public double getTelefonoCelular() {
-        return telefonoCelular;
-    }
+  public void setTelefonoFijo(Double telefonoFijo) {
+    this.telefonoFijo = telefonoFijo;
+  }
 
-    public void setTelefonoCelular(double telefonoCelular) {
-        this.telefonoCelular = telefonoCelular;
-    }
+  public Double getTelefonoCelular() {
+    return telefonoCelular;
+  }
 
-    public String getDireccion() {
-        return direccion;
-    }
+  public void setTelefonoCelular(Double telefonoCelular) {
+    this.telefonoCelular = telefonoCelular;
+  }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+  public String getDireccion() {
+    return direccion;
+  }
 
-    public int getRol() {
-        return rol;
-    }
+  public void setDireccion(String direccion) {
+    this.direccion = direccion;
+  }
 
-    public void setRol(int rol) {
-        this.rol = rol;
-    }
+  public int getRol() {
+    return rol;
+  }
 
-    public String getUsuario() {
-        return usuario;
-    }
+  public void setRol(int rol) {
+    this.rol = rol;
+  }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
+  public String getUsuario() {
+    return usuario;
+  }
 
-    public String getClave() {
-        return clave;
-    }
+  public void setUsuario(String usuario) {
+    this.usuario = usuario;
+  }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
+  public String getClave() {
+    return clave;
+  }
 
-    public int getOficina() {
-        return oficina;
-    }
+  public void setClave(String clave) {
+    this.clave = clave;
+  }
 
-    public void setOficina(int oficina) {
-        this.oficina = oficina;
-    }
-    
+  public int getOficina() {
+    return oficina;
+  }
+
+  public void setOficina(int oficina) {
+    this.oficina = oficina;
+  }
+
 }//fin clase personaVO

@@ -16,7 +16,7 @@ public class Conexion {
             return con;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Error al conectar a la Base de Datos");
+            throw new Exception("Error al conectar a la Base de Datos" + e);
         }
     } // fin conectar
 

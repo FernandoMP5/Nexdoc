@@ -31,10 +31,10 @@
     <div class="Login">
       <nav>
         <ul>
-          <li><a href=""><%=personaVO.getNombre()%><img src="img/login.png"></a>
+          <li><a><img src="img/login.png"></a> 
             <div class="submenu">
               <div class="submenu-items">
-                <p>Opciones</p>
+                <p>Opciones</p> 
                 <ul>
                   <li><a href="index.jsp">Cerrar Sesion</a></li>
                 </ul>
@@ -51,16 +51,16 @@
             <img src="img/Encabezado.png"> 
             <li><a>Perfil</a></li>	 
             <li><a data-toggle="modal" data-target="#Radicar">Radicar</a></li>
-            <li><a id="Recibidos">Recibidos</a></li>
+            <li><a id="listarRecibidos">Recibidos</a></li>
             <li>
               <a>Administrar</a>
               <div class="submenu">
                 <div class="submenu-items">
                   <p>Opciones</p>
                   <ul>
-                    <li><a id="ListarOfi" href="#">Área</a></li>
-                    <li><a href="">Remitente</a></li>
-                    <li><a id="ListarFun" href="#">Funcionario</a></li>
+                    <li><a id="listarOficinas">Área</a></li>
+                    <li><a id="listarRemitentes">Remitente</a></li>
+                    <li><a id="listarFuncionarios">Funcionario</a></li>
                   </ul>
                 </div>
               </div>
@@ -92,6 +92,7 @@
     </footer>
     <div class="pie">Designed by Nexdoc | © Copyright 2019 | All Rights Reserved</div>
     <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/MyScript.js" type="text/javascript"></script>
   </body>
@@ -137,9 +138,9 @@
           </select><br/>
           <label>Nivel de Prioridad</label></br>
           <div class="radio">
-            <input type="radio" name="rbprioridad" value="1"/> Prueba</br>
-            <input type="radio" name="rbprioridad" value="2"/> Prueba</br>
-            <input type="radio" name="rbprioridad" value="3"/> Prueba</br>
+            <input type="radio" name="rbprioridad" value="1"/> Maximo</br>
+            <input type="radio" name="rbprioridad" value="2"/> Medion</br>
+            <input type="radio" name="rbprioridad" value="3"/> Bajonn</br>
           </div>
           <input type="file" name="documento"><br><br>
           <input type="submit" value="Radicar Documento" name="accion">

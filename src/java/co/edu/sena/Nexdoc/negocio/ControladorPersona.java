@@ -21,6 +21,8 @@ public class ControladorPersona extends HttpServlet {
   Conexion cn = new Conexion();
   personaVO personaVO = new personaVO();
   personaDAO personaDAO = new personaDAO(con);
+  String inicio = "inicio.jsp";
+  String login = "login.jsp";
   int r;
 
   public ControladorPersona() throws Exception {
@@ -66,9 +68,9 @@ public class ControladorPersona extends HttpServlet {
           if (r == 1) {
             HttpSession misession = request.getSession(true);
             misession.setAttribute("personaVO", personaVO);
-            request.getRequestDispatcher("inicio.jsp").forward(request, response);
+            acceso = inicio;
           } else {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            acceso = login;
           }
         } catch (Exception ex) {
           Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);

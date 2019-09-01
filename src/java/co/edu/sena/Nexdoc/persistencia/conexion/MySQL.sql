@@ -23,6 +23,8 @@ INSERT INTO tipoIdentificacion VALUES (1,'Cédula de Ciudadanía')
 
 INSERT INTO rol VALUES (1,'SuperADMIN')
 
+INSERT INTO documento(idRemitente) VALUES ('1000225552')
+
 INSERT INTO estado VALUES (1,'En proceso')
 
 INSERT INTO prioridad VALUES (1,'Maxima')

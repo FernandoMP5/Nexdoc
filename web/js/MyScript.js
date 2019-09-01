@@ -3,15 +3,15 @@ $(document).ready(function () {
     console.log("Cargando recibidos");
     $("#contenido").load("listarRecibidos.jsp");
   });
-  $('#listarOficina').click(function () {
+  $('#listarOficinas').click(function () {
     console.log("Cargando oficinas");
-    $("#contenido").load("listarO ficinas.jsp");
+    $("#contenido").load("listarOficinas.jsp");
   });
-  $('#listarFuncionario').click(function () {
+  $('#listarFuncionarios').click(function () {
     console.log("Cargando funcionarios");
-    $("#contenido").load("listarFuncionario.jsp");
+    $("#contenido").load("listarFuncionarios.jsp");
   });
-  $('#listarRemitente').click(function () {
+  $('#listarRemitentes').click(function () {
     console.log("Cargando remitentes");
     $("#contenido").load("listarRemitentes.jsp");
   });
@@ -20,21 +20,13 @@ $(document).ready(function () {
     $("#contenido").load("vistaDocumento.jsp");
   });
 });
-function validar() {
+$("input[name=Ingresar]").click(function () {
   $.ajax({
     method: "post",
     url: 'ControladorPersona',
-    data: {usuario: $("input[name='txtusuario']").val(), clave: $("input[name='txtclave']"), accion: $("Ingresar")},
-    type: 'post'
-  });
-}
-//function controlador() {
-//  $.ajax({
-//    method: "post",
-//    url: "Controlador",
-//    data: {correo: $("#txtcorreo").val(), asunto: $("#txtasunto").val(), descripcion: $("#txtdescripcion").val()}
-//  })
-//          .done(function (result) {
-//            $("#interesados").html(result);
-//          });
-//}
+    data: {usuario: $("#txtusuario").val(), clave: $("#txtclave").val(), accion: $("#btningresar").val()}
+  })
+          .done(function (result) {
+            $("login.jsp").html(result);
+          });
+});

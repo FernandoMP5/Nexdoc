@@ -20,6 +20,8 @@ $(document).ready(function () {
     $("#contenido").load("vistaDocumento.jsp");
   });
 });
+
+
 $("input[name=Ingresar]").click(function () {
   $.ajax({
     method: "post",
@@ -30,3 +32,15 @@ $("input[name=Ingresar]").click(function () {
             $("login.jsp").html(result);
           });
 });
+
+listarFuncionariosPorOficina();
+function listarFuncionariosPorOficina() {
+  $.ajax({
+    method: "post",
+    url: "ControladorPersona",
+    data: {idOficina: $("#cbooficina").val(), accion: $("listar")}
+  })
+          .done(function (result) {
+            $("#cbodestinatario").html(result);
+          });
+}

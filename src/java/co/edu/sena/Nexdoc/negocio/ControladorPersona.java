@@ -138,6 +138,9 @@ public class ControladorPersona extends HttpServlet {
           Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
         }
         break;
+      case "listar":
+        request.setAttribute("idOficina", request.getParameter("idOficina"));
+        break;
       default:
         throw new AssertionError();
     }

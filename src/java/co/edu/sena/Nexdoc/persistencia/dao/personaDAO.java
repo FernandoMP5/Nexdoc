@@ -156,4 +156,22 @@ public class personaDAO {
       throw new Exception("Error al listar los funcionarios " + e);
     }
   }
+
+  public List listarFuncionariosPorOficina(int idOficina) throws Exception {
+    sql = "SELECT CONCAT(nombre,' ',apellido)nombre,numeroIdentificacion "
+            + "FROM persona WHERE rol > 1 AND oficina=" + idOficina;
+    try {
+      ps = con.prepareStatement(sql);
+      rs = ps.executeQuery();
+      while (rs.next()) {
+        personaVO personaVO = new personaVO();
+        personaVO.setNombre(rs.getString("nombre"));
+        personaVO.setNumeroIdentificacion(rs.getString("numeroIdentificacion"));
+        lista.add(personaVO);
+      }
+      return lista;
+    } catch (SQLException e) {
+      throw new Exception("Error al listar los funcionarios de la oficina " + e);
+    }
+  }
 }//fin clase personaDAO

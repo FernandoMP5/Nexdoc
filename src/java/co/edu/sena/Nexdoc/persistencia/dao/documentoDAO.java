@@ -58,7 +58,7 @@ public class documentoDAO {
             + "0,"//visualizaciones
             + "'" + documentoVO.getIdRemitente() + "',"//idRemitente
             + "'1000225552',"//idDestinatario
-            + "'1000225552',"//idRecepcionista
+            + "'" + documentoVO.getIdRecepcionista() + "',"//idRecepcionista
             + "1,"//idEstado
             + "" + documentoVO.getIdPrioridad() + ","//idPrioridad
             + "NOW(),"//fechaRadicacion

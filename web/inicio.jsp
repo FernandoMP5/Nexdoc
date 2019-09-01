@@ -4,6 +4,7 @@
     Author     : Familia Moreno
 --%>
 
+<%@page import="co.edu.sena.Nexdoc.persistencia.dao.personaDAO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.personaVO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%> 
@@ -26,12 +27,12 @@
   <body>
     <%
       HttpSession misession = (HttpSession) request.getSession();
-      personaVO personaVO = (personaVO) misession.getAttribute("personaVO");
+      personaVO persona = (personaVO) misession.getAttribute("personaVO");
     %>
     <div class="Login">
       <nav>
         <ul>
-          <li><a><img src="img/login.png"></a> 
+          <li><a><%=persona.getNombre()%><img src="img/login.png"></a> 
             <div class="submenu">
               <div class="submenu-items">
                 <p>Opciones</p> 
@@ -120,27 +121,44 @@
             <%}%>
           </select><br/>
           <label>Oficina</label><br/>
-          <select class="texto1" name="cbooficina">
+          <select class="texto1" value="1" name="cbooficina" id="cbooficina" onchange="listarFuncionariosPorOficina()" onkeyup="this.onchange()" onpaste="this.onchange()" oninput="this.onchange()">
             <%
               oficinaDAO oficinaDAO = new oficinaDAO(cn.conectar());
               List<oficinaVO> listaroficina = oficinaDAO.listarOficina();
               Iterator<oficinaVO> iteraoficinaVO = listaroficina.iterator();
               oficinaVO oficinaVO = null;
+            %>
+            <option value="1">Recursos Humanos</option>
+            <%
               while (iteraoficinaVO.hasNext()) {
                 oficinaVO = iteraoficinaVO.next();
+                if (oficinaVO.getIdOficina() > 1) {
             %>
             <option value="<%=oficinaVO.getIdOficina()%>"><%=oficinaVO.getNombreOficina()%></option> 
-            <%}%>
+            <%
+                }
+              }
+            %>
           </select><br/>
           <label>Destinatario</label><br/>
           <select name="cbodestinatario">
-            <option value="1">Manuel Sebastian</option>
+            <%
+              personaDAO personaDAO = new personaDAO(cn.conectar());
+              int idOficina = Integer.parseInt((String) request.getAttribute("idOficina"));
+              List<personaVO> listaFuncincionarios = personaDAO.listarFuncionariosPorOficina(idOficina);
+              Iterator<personaVO> iteraFuncionario = listaFuncincionarios.iterator();
+              personaVO personaVO = null;
+              while (iteraFuncionario.hasNext()) {
+                personaVO = iteraFuncionario.next();
+            %>
+            <option value="<%=personaVO.getNumeroIdentificacion()%>"><%=personaVO.getNombre()%></option>
+            <%}%>
           </select><br/>
           <label>Nivel de Prioridad</label></br>
           <div class="radio">
+            <input type="radio" name="rbprioridad" value="3"/> Bajo</br>
+            <input type="radio" name="rbprioridad" value="2"/> Medio</br>
             <input type="radio" name="rbprioridad" value="1"/> Maximo</br>
-            <input type="radio" name="rbprioridad" value="2"/> Medion</br>
-            <input type="radio" name="rbprioridad" value="3"/> Bajonn</br>
           </div>
           <input type="file" name="documento"><br><br>
           <input type="submit" value="Radicar Documento" name="accion">

@@ -4,12 +4,14 @@ import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
 import co.edu.sena.Nexdoc.persistencia.dao.documentoDAO;
 import co.edu.sena.Nexdoc.persistencia.dao.personaDAO;
 import co.edu.sena.Nexdoc.persistencia.vo.documentoVO;
+import co.edu.sena.Nexdoc.persistencia.vo.personaVO;
 import co.edu.sena.Nexdoc.persistensia.vo.oficinaVO;
 import co.edu.sena.Nexdoc.persistensia.vo.tipoDocumentoVO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -19,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @WebServlet("/Upload")
@@ -31,6 +34,7 @@ public class ControladorDocumento extends HttpServlet {
   documentoVO documentoVO = new documentoVO();
   tipoDocumentoVO tipoDocumentoVO = new tipoDocumentoVO();
   oficinaVO oficinaVO = new oficinaVO();
+  personaVO personaVO = new personaVO();
   documentoDAO documentoDAO = new documentoDAO(con);
   personaDAO personaDAO = new personaDAO(con);
 
@@ -63,6 +67,9 @@ public class ControladorDocumento extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+    HttpSession misession = request.getSession(true);
+//    misession.getAttribute("personaVO");
+    personaVO persona= (personaVO) misession.getAttribute("personaVO");
     String acceso = "";
     String accion = request.getParameter("accion");
     String prueba = "login.jsp";
@@ -73,6 +80,7 @@ public class ControladorDocumento extends HttpServlet {
         String destinatario = request.getParameter("cbodestinatario");
         int idoficina = Integer.parseInt(request.getParameter("cbooficina"));
         int prioridad = Integer.parseInt(request.getParameter("rbprioridad"));
+        String idRecepcionista = persona.getNumeroIdentificacion();
         InputStream inputStream = null;
         try {
           Part filePart = request.getPart("documento");
@@ -88,6 +96,7 @@ public class ControladorDocumento extends HttpServlet {
         documentoVO.setIdRemitente(remitente);
         documentoVO.setIdtipoDocumento(idtipodocumento);
         documentoVO.setIdDestinatario(destinatario);
+        documentoVO.setIdRecepcionista(idRecepcionista);
         documentoVO.setIdOficina(idoficina);
         documentoVO.setIdPrioridad(prioridad);
         if (inputStream != null) {

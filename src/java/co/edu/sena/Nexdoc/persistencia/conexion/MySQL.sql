@@ -6,6 +6,7 @@ SELECT * FROM prioridad
 SELECT * FROM estado
 SELECT * FROM tipoDocumento
 SELECT * FROM tipoIdentificacion
+SELECT * FROM oficina
 SELECT NOW();
 
 INSERT INTO documento(idDocumento,visualizaciones,idRemitente,idDestinatario,idRecepcionista,idEstado,idPrioridad,fechaRadicacion,idOficina,idtipoDocumento)
@@ -38,3 +39,6 @@ INNER JOIN rol R ON P.rol=R.idRol INNER JOIN oficina O ON O.idOficina=P.oficina
 WHERE P.rol>1
 
 SELECT * FROM persona WHERE rol=1
+
+SELECT CONCAT(nombre,' ',apellido)nombre,numeroIdentificacion 
+FROM persona WHERE rol > 1 AND oficina=2

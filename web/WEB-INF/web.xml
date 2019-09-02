@@ -12,6 +12,10 @@
         <servlet-name>ControladorDocumento</servlet-name>
         <servlet-class>co.edu.sena.Nexdoc.negocio.ControladorDocumento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>pdf</servlet-name>
+        <servlet-class>co.edu.sena.Nexdoc.negocio.pdf</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>ControladorDocumento</servlet-name>
         <url-pattern>/ControladorDocumento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pdf</servlet-name>
+        <url-pattern>/pdf</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

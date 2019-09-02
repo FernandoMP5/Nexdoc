@@ -3,6 +3,8 @@ package co.edu.sena.Nexdoc.persistencia.dao;
 
 import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
 import co.edu.sena.Nexdoc.persistencia.vo.documentoVO;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +24,7 @@ public class documentoDAO {
     this.con = con;
   }
 
-  public List recibidos(int idDestinatario) throws Exception {
+  public List recibidos(String idDestinatario) throws Exception {
     sql = "SELECT * FROM documento WHERE idDestinatario=" + idDestinatario;
     try {
       ps = con.prepareStatement(sql);
@@ -73,11 +75,34 @@ public class documentoDAO {
 //      ps.setInt(5, documentoVO.getIdtipoDocumento());
       ps.executeUpdate();
       return false;
-    } catch (Exception e) {
+    } catch (SQLException e) {
       throw new Exception("Error al radicar el documento" + e);
     } finally {
       Conexion.cerrar(ps, rs);
     }
   }//fin radicar
 
+  public byte[] motrarPDF(int idDocumento) throws Exception {
+    byte[] b = null;
+    sql = "SELECT documentoPDF FROM documento WHERE idDocumento = " + idDocumento;
+    try {
+      ps = con.prepareStatement(sql);
+      rs = ps.executeQuery();
+      while (rs.next()) {
+        b = rs.getBytes(1);
+      }
+      InputStream bos = new ByteArrayInputStream(b);
+
+      int tamanoInput = bos.available();
+      byte[] datosPDF = new byte[tamanoInput];
+      bos.read(datosPDF, 0, tamanoInput);
+//          response.getOutputStream().write(datosPDF);
+      bos.close();
+      return datosPDF;
+    } catch (SQLException e) {
+      throw new Exception("Error al mostrar el PDF" + e);
+    } finally {
+      Conexion.cerrar(ps, rs);
+    }
+  }
 }//fin clase documentoDAO

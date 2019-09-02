@@ -14,6 +14,7 @@ VALUES (1,1,1000225552,1000225552,1000225552,1,1,NOW(),1,1)
 GO
 
 DELETE FROM documento
+WHERE idDocumento=1
 
 INSERT INTO historial(`idHistoria`,`idDocumento`,`fechaHistoria`,`respuestaComen`,`idDestinatario`) 
 VALUES (1,1,NOW(),'COMENTARIO PRUBEA PONGA CUALQUIER VAINA',1000225552)
@@ -42,3 +43,5 @@ SELECT * FROM persona WHERE rol=1
 
 SELECT CONCAT(nombre,' ',apellido)nombre,numeroIdentificacion 
 FROM persona WHERE rol > 1 AND oficina=2
+
+SELECT documentoPDF FROM documento

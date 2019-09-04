@@ -37,7 +37,7 @@
        <div class="submenu-items">
         <p>Opciones</p> 
         <ul>
-         <li><a href="index.jsp">Cerrar Sesion</a></li>
+         <li><a href="index.jsp">Cerrar Sesion</a></li> 
         </ul>
        </div>
       </div>

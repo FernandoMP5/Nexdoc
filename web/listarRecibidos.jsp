@@ -41,7 +41,7 @@
        <%
         Conexion cn = new Conexion();
         documentoDAO documentoDAO = new documentoDAO(cn.conectar());
-        List<documentoVO> listarRecibidos = documentoDAO.recibidos("1000225552");
+        List<documentoVO> listarRecibidos = documentoDAO.recibidos(personaVO.getNumeroIdentificacion());
         Iterator<documentoVO> iteraRecibidos = listarRecibidos.iterator();
         documentoVO documentoVO = null;
 
@@ -50,23 +50,19 @@
        %>
        <tbody>
         <tr>
-         <td><input type="button" id="idDocumento" value="+ Mas" name="idDocumento"></td>
+         <td><a target="_blank" href="pdf?idDocumento=<%=documentoVO.getIdDocumento()%>"><img src="img/Rebisado.jpg" width="70px" height="70px"></a></td> 
          <td><%=documentoVO.getIdtipoDocumento()%></td> 
          <td><%=documentoVO.getIdOficina()%></td> 
          <td><%=documentoVO.getFechaRadicacion()%></td> 
          <td><%=documentoVO.getIdRemitente()%></td>
-         <td><a href="http://localhost:8086/Nexdoc/pdf?idDocumento=<%=documentoVO.getIdDocumento()%>">prueba link</a></td> 
+         <%}%>
         </tr>
-        <%}%>
        </tbody>
       </table>
      </form>
     </div>
    </center>
   </div>
-       <div id="vistaDocumento">
-        <a href="http://localhost:8086/Nexdoc/pdf?idDocumento=2">prueba link</a>
-       </div>
   <script src="js/jquery.js" type="text/javascript"></script>
   <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
   <script src="js/MyScript.js" type="text/javascript"></script>

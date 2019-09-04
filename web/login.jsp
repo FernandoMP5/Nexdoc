@@ -17,10 +17,10 @@
       <div class="wrapper fadeInDown">
         <div id="formContent"><br/>
           <img src="img/Encabezado.png" width="366px" height="150px">
-          <form>
-            <input type="text" id="txtusuario" placeholder="Usuario" autocomplete="off">
-            <input type="password" id="txtclave" placeholder="Contraseña"><br/>
-            <input type="button" id="btningresar" name="Ingresar" value="Ingresar">
+          <form action="ControladorPersona" method="post">
+            <input type="text" name="txtusuario" placeholder="Usuario" autocomplete="off">
+            <input type="password" name="txtclave" placeholder="Contraseña"><br/>
+            <input type="submit" id="btningresar" name="accion" value="Ingresar">
           </form>
           <div id="formFooter">
             <a class="underlineHover" href="#">Restablecer Contraseña</a>

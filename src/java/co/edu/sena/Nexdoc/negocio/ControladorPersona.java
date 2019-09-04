@@ -60,8 +60,8 @@ public class ControladorPersona extends HttpServlet {
     switch (accion) {
       case "Ingresar":
         try {
-          String usuario = request.getParameter("usuario");
-          String contraseña = request.getParameter("clave");
+          String usuario = request.getParameter("txtusuario");
+          String contraseña = request.getParameter("txtclave");
           personaVO.setUsuario(usuario);
           personaVO.setClave(contraseña);
           r = personaDAO.validar(personaVO);

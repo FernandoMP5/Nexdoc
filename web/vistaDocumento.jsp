@@ -4,35 +4,36 @@
     Author     : Familia Moreno
 --%>
 
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.documentoVO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.dao.documentoDAO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Vista Documento</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <link href="css/vistaDocumento.css" rel="stylesheet" type="text/css"/>
  </head>
  <body>
- <center>
+  <%
+   Conexion cn = new Conexion();
+   documentoDAO documentoDAO = new documentoDAO(cn.conectar());
+   int idDocumento = Integer.parseInt((String) request.getAttribute("idDocumento"));
+   documentoVO documentoVO = (documentoVO) documentoDAO.listarDocumento(idDocumento); 
+  %>
   <div id="documento">
-
+   <object data="pdf?idDocumento=<%=documentoVO.getIdDocumento()%>" type="application/pdf"></object>
   </div>
- </center>
- <input type="button" name="" value="Crear Respuesta" data-toggle="modal" data-target="#generarRespuesta">
- <script src="js/jquery.js" type="text/javascript"></script>
- <script src="js/bootstrap.min.js" type="text/javascript"></script>
-</body>
+  <div id="info">
+   <label>Id Documento</label><br>
+   <label><%=documentoVO.getIdDocumento()%></label><br> 
+   <label>Remitente</label><br>
+   <label><%=documentoVO.getIdRemitente().getNombre()%></label><br>
+   <label>Prioridad</label><br>
+   <label><%=documentoVO.getIdPrioridad().getDescripcion()%></label><br>  
+   <label>Fecha Radicacion</label><br>
+   <label><%=documentoVO.getFechaRadicacion()%></label><br>
+  </div>
+ </body>
 </html>
-<div class="modal fade" id="generarRespuesta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
- <div class="modal-dialog" id="modal2">
-  <div class="modal-content">
-   <div class="modal-body"><br>
-    <h1>Respuesta</h1>
-    <textarea></textarea>
-    <input type="file">
-    <input type="button" value="Enviar" id="enviar">
-   </div>
-  </div>
- </div>
-</div>

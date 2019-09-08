@@ -3,6 +3,10 @@ package co.edu.sena.Nexdoc.persistencia.dao;
 
 import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
 import co.edu.sena.Nexdoc.persistencia.vo.documentoVO;
+import co.edu.sena.Nexdoc.persistencia.vo.personaVO;
+import co.edu.sena.Nexdoc.persistencia.vo.oficinaVO;
+import co.edu.sena.Nexdoc.persistencia.vo.prioridadVO;
+import co.edu.sena.Nexdoc.persistencia.vo.tipoDocumentoVO;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -25,25 +29,31 @@ public class documentoDAO {
  }
 
  public List recibidos(String idDestinatario) throws Exception {
-  sql = "SELECT * FROM documento WHERE idDestinatario=" + idDestinatario;
+  sql = "SELECT CONCAT(p.nombre,' ',p.apellido)nombre,d.idDocumento,d.visualizaciones,d.fechaRadicacion,r.descripcion,o.nombreOficina,t.descripcion FROM documento d INNER JOIN persona p ON d.`idRemitente`=p.`numeroIdentificacion` INNER JOIN oficina o ON d.`idOficina`=o.idOficina INNER JOIN prioridad r ON d.idPrioridad=r.idPrioridad INNER JOIN tipoDocumento t ON d.`idtipoDocumento`=t.`idtipoDocumento` WHERE idDestinatario=" + idDestinatario;
   try {
    ps = con.prepareStatement(sql);
    rs = ps.executeQuery();
    while (rs.next()) {
     documentoVO documentoVO = new documentoVO();
-    documentoVO.setIdDocumento(rs.getInt("idDocumento"));
-    documentoVO.setDocumentoPDFmostrar(rs.getBytes("documentoPDF"));
-    documentoVO.setVisualizaciones(rs.getInt("visualizaciones"));
-    documentoVO.setIdRemitente(rs.getString("idRemitente"));
-    documentoVO.setIdDestinatario(rs.getString("idDestinatario"));
-    documentoVO.setIdRecepcionista(rs.getString("idRecepcionista"));
-    documentoVO.setRespuestaPDFmostrar(rs.getBytes("respuestaPDF"));
-    documentoVO.setRespuestaComen(rs.getString("respuestaComen"));
-    documentoVO.setIdEstado(rs.getInt("idEstado"));
-    documentoVO.setIdPrioridad(rs.getInt("idPrioridad"));
-    documentoVO.setFechaRadicacion(rs.getDate("fechaRadicacion"));
-    documentoVO.setIdOficina(rs.getInt("idOficina"));
-    documentoVO.setIdtipoDocumento(rs.getInt("idtipoDocumento"));
+    personaVO personaVO = new personaVO();
+    oficinaVO oficinaVO = new oficinaVO();
+    tipoDocumentoVO tipoDocumentoVO = new tipoDocumentoVO();
+    prioridadVO prioridadVO = new prioridadVO();
+    documentoVO.setIdDocumento(rs.getInt("d.idDocumento"));
+    documentoVO.setVisualizaciones(rs.getInt("d.visualizaciones"));
+    documentoVO.setFechaRadicacion(rs.getDate("d.fechaRadicacion"));
+
+    personaVO.setNombre(rs.getString("nombre"));
+    documentoVO.setIdRemitente(personaVO);
+
+    prioridadVO.setDescripcion(rs.getString("r.descripcion"));
+    documentoVO.setIdPrioridad(prioridadVO);
+
+    oficinaVO.setNombreOficina(rs.getString("o.nombreOficina"));
+    documentoVO.setIdOficina(oficinaVO);
+
+    tipoDocumentoVO.setDescripcion(rs.getString("t.descripcion"));
+    documentoVO.setIdtipoDocumento(tipoDocumentoVO);
     lista.add(documentoVO);
    }
    return lista;
@@ -82,27 +92,71 @@ public class documentoDAO {
   }
  }//fin radicar
 
- public byte[] motrarPDF(int idDocumento) throws Exception {
-  byte[] b = null;
-  sql = "SELECT documentoPDF FROM documento WHERE idDocumento = " + idDocumento;
+ public documentoVO listarDocumento(int idDocumento) throws Exception {
+  documentoVO documentoVO = new documentoVO();
+  personaVO personaVO = new personaVO();
+  oficinaVO oficinaVO = new oficinaVO();
+  tipoDocumentoVO tipoDocumentoVO = new tipoDocumentoVO();
+  prioridadVO prioridadVO = new prioridadVO();
+  sql = "SELECT CONCAT(p.nombre,' ',p.apellido)nombre,d.idDocumento,d.visualizaciones,d.fechaRadicacion,r.descripcion,o.nombreOficina,t.descripcion FROM documento d INNER JOIN persona p ON d.`idRemitente`=p.`numeroIdentificacion` INNER JOIN oficina o ON d.`idOficina`=o.idOficina INNER JOIN prioridad r ON d.idPrioridad=r.idPrioridad INNER JOIN tipoDocumento t ON d.`idtipoDocumento`=t.`idtipoDocumento` WHERE idDocumento=" + idDocumento;
   try {
    ps = con.prepareStatement(sql);
    rs = ps.executeQuery();
    while (rs.next()) {
-    b = rs.getBytes(1);
+    documentoVO.setIdDocumento(rs.getInt("d.idDocumento"));
+    documentoVO.setVisualizaciones(rs.getInt("d.visualizaciones"));
+    documentoVO.setFechaRadicacion(rs.getDate("d.fechaRadicacion"));
+    personaVO.setNombre(rs.getString("nombre"));
+    documentoVO.setIdRemitente(personaVO);
+    prioridadVO.setDescripcion(rs.getString("r.descripcion"));
+    documentoVO.setIdPrioridad(prioridadVO);
+    oficinaVO.setNombreOficina(rs.getString("o.nombreOficina"));
+    documentoVO.setIdOficina(oficinaVO);
+    tipoDocumentoVO.setDescripcion(rs.getString("t.descripcion"));
+    documentoVO.setIdtipoDocumento(tipoDocumentoVO);
    }
-   InputStream bos = new ByteArrayInputStream(b);
-
-   int tamanoInput = bos.available();
-   byte[] datosPDF = new byte[tamanoInput];
-   bos.read(datosPDF, 0, tamanoInput);
-//          response.getOutputStream().write(datosPDF);
-   bos.close();
-   return datosPDF;
+   return documentoVO;
   } catch (SQLException e) {
-   throw new Exception("Error al mostrar el PDF" + e);
+   throw new Exception("Error al mostrar el documento");
   } finally {
    Conexion.cerrar(ps, rs);
   }
  }
+
+ public List enviados(String idRecepcionista) throws Exception {
+  sql = "SELECT CONCAT(p.nombre,' ',p.apellido)nombre,d.idDocumento,d.visualizaciones,d.fechaRadicacion,r.descripcion,o.nombreOficina,t.descripcion FROM documento d INNER JOIN persona p ON d.`idRemitente`=p.`numeroIdentificacion` INNER JOIN oficina o ON d.`idOficina`=o.idOficina INNER JOIN prioridad r ON d.idPrioridad=r.idPrioridad INNER JOIN tipoDocumento t ON d.`idtipoDocumento`=t.`idtipoDocumento` WHERE d.idRecepcionista=" + idRecepcionista;
+  try {
+   ps = con.prepareStatement(sql);
+   rs = ps.executeQuery();
+   while (rs.next()) {
+    documentoVO documentoVO = new documentoVO();
+    personaVO personaVO = new personaVO();
+    oficinaVO oficinaVO = new oficinaVO();
+    tipoDocumentoVO tipoDocumentoVO = new tipoDocumentoVO();
+    prioridadVO prioridadVO = new prioridadVO();
+    documentoVO.setIdDocumento(rs.getInt("d.idDocumento"));
+    documentoVO.setVisualizaciones(rs.getInt("d.visualizaciones"));
+    documentoVO.setFechaRadicacion(rs.getDate("d.fechaRadicacion"));
+
+    personaVO.setNombre(rs.getString("nombre"));
+    documentoVO.setIdDestinatario(personaVO);
+
+    prioridadVO.setDescripcion(rs.getString("r.descripcion"));
+    documentoVO.setIdPrioridad(prioridadVO);
+
+    oficinaVO.setNombreOficina(rs.getString("o.nombreOficina"));
+    documentoVO.setIdOficina(oficinaVO);
+
+    tipoDocumentoVO.setDescripcion(rs.getString("t.descripcion"));
+    documentoVO.setIdtipoDocumento(tipoDocumentoVO);
+    lista.add(documentoVO);
+   }
+   return lista;
+  } catch (SQLException e) {
+   throw new Exception("Error al listar la tabla enviados" + e);
+  } finally {
+   Conexion.cerrar(ps, rs);
+  }
+ }//fin recibidos
+
 }//fin clase documentoDAO

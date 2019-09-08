@@ -1,165 +1,165 @@
-/** @author Sena*/
 package co.edu.sena.Nexdoc.persistencia.vo;
 
 import java.io.InputStream;
 import java.sql.Date;
 
-
 public class documentoVO {
-    
-    private int idDocumento;
-    private InputStream documentoPDF;
-    private byte[] documentoPDFmostrar;
-    private int visualizaciones;
-    private String idRemitente;
-    private String idDestinatario;
-    private String idRecepcionista;
-    private InputStream respuestaPDF;
-    private byte[] respuestaPDFmostrar;
-    private String respuestaComen;
-    private int idEstado;
-    private int idPrioridad;
-    private Date fechaRadicacion;
-    private int idOficina;
-    private int idtipoDocumento;
 
-    public documentoVO() {
-    }
+ private int idDocumento;
+ private InputStream documentoPDF;
+ private byte[] documentoPDFmostrar;
+ private int visualizaciones;
+ private personaVO idRemitente;
+ private personaVO idDestinatario;
+ private personaVO idRecepcionista;
+ private InputStream respuestaPDF;
+ private byte[] respuestaPDFmostrar;
+ private String respuestaComen;
+ private int idEstado;
+ private prioridadVO idPrioridad;
+ private Date fechaRadicacion;
+ private oficinaVO idOficina;
+ private tipoDocumentoVO idtipoDocumento;
 
-    public documentoVO(int idDocumento, byte[] documentoPDFmostrar, int visualizaciones, String idRemitente, String idDestinatario, String idRecepcionista, byte[] respuestaPDFmostrar, String respuestaComen, int idEstado, int idPrioridad, Date fechaRadicacion, int idOficina, int idtipoDocumento) {
-        this.idDocumento = idDocumento;
-        this.documentoPDFmostrar = documentoPDFmostrar;
-        this.visualizaciones = visualizaciones;
-        this.idRemitente = idRemitente;
-        this.idDestinatario = idDestinatario;
-        this.idRecepcionista = idRecepcionista;
-        this.respuestaPDFmostrar = respuestaPDFmostrar;
-        this.respuestaComen = respuestaComen;
-        this.idEstado = idEstado;
-        this.idPrioridad = idPrioridad;
-        this.fechaRadicacion = fechaRadicacion;
-        this.idOficina = idOficina;
-        this.idtipoDocumento = idtipoDocumento;
-    }
+ public documentoVO() {
+ }
 
-    public int getIdDocumento() {
-        return idDocumento;
-    }
+ public documentoVO(int idDocumento, InputStream documentoPDF, byte[] documentoPDFmostrar, int visualizaciones, personaVO idRemitente, personaVO idDestinatario, personaVO idRecepcionista, InputStream respuestaPDF, byte[] respuestaPDFmostrar, String respuestaComen, int idEstado, prioridadVO idPrioridad, Date fechaRadicacion, oficinaVO idOficina, tipoDocumentoVO idtipoDocumento) {
+  this.idDocumento = idDocumento;
+  this.documentoPDF = documentoPDF;
+  this.documentoPDFmostrar = documentoPDFmostrar;
+  this.visualizaciones = visualizaciones;
+  this.idRemitente = idRemitente;
+  this.idDestinatario = idDestinatario;
+  this.idRecepcionista = idRecepcionista;
+  this.respuestaPDF = respuestaPDF;
+  this.respuestaPDFmostrar = respuestaPDFmostrar;
+  this.respuestaComen = respuestaComen;
+  this.idEstado = idEstado;
+  this.idPrioridad = idPrioridad;
+  this.fechaRadicacion = fechaRadicacion;
+  this.idOficina = idOficina;
+  this.idtipoDocumento = idtipoDocumento;
+ }
 
-    public void setIdDocumento(int idDocumento) {
-        this.idDocumento = idDocumento;
-    }
+ public personaVO getIdRemitente() {
+  return idRemitente;
+ }
 
-    public byte[] getDocumentoPDFmostrar() {
-        return documentoPDFmostrar;
-    }
+ public void setIdRemitente(personaVO idRemitente) {
+  this.idRemitente = idRemitente;
+ }
 
-    public void setDocumentoPDFmostrar(byte[] documentoPDFmostrar) {
-        this.documentoPDFmostrar = documentoPDFmostrar;
-    }
+ public personaVO getIdDestinatario() {
+  return idDestinatario;
+ }
 
-    public InputStream getDocumentoPDF() {
-        return documentoPDF;
-    }
+ public void setIdDestinatario(personaVO idDestinatario) {
+  this.idDestinatario = idDestinatario;
+ }
 
-    public void setDocumentoPDF(InputStream documentoPDF) {
-        this.documentoPDF = documentoPDF;
-    }
+ public personaVO getIdRecepcionista() {
+  return idRecepcionista;
+ }
 
-    public int getVisualizaciones() {
-        return visualizaciones;
-    }
+ public void setIdRecepcionista(personaVO idRecepcionista) {
+  this.idRecepcionista = idRecepcionista;
+ }
 
-    public void setVisualizaciones(int visualizaciones) {
-        this.visualizaciones = visualizaciones;
-    }
+ public int getIdDocumento() {
+  return idDocumento;
+ }
 
-    public String getIdRemitente() {
-        return idRemitente;
-    }
+ public void setIdDocumento(int idDocumento) {
+  this.idDocumento = idDocumento;
+ }
 
-    public void setIdRemitente(String idRemitente) {
-        this.idRemitente = idRemitente;
-    }
+ public byte[] getDocumentoPDFmostrar() {
+  return documentoPDFmostrar;
+ }
 
-    public String getIdDestinatario() {
-        return idDestinatario;
-    }
+ public void setDocumentoPDFmostrar(byte[] documentoPDFmostrar) {
+  this.documentoPDFmostrar = documentoPDFmostrar;
+ }
 
-    public void setIdDestinatario(String idDestinatario) {
-        this.idDestinatario = idDestinatario;
-    }
+ public InputStream getDocumentoPDF() {
+  return documentoPDF;
+ }
 
-    public String getIdRecepcionista() {
-        return idRecepcionista;
-    }
+ public void setDocumentoPDF(InputStream documentoPDF) {
+  this.documentoPDF = documentoPDF;
+ }
 
-    public void setIdRecepcionista(String idRecepcionista) {
-        this.idRecepcionista = idRecepcionista;
-    }
+ public int getVisualizaciones() {
+  return visualizaciones;
+ }
 
-    public byte[] getRespuestaPDFmostrar() {
-        return respuestaPDFmostrar;
-    }
+ public void setVisualizaciones(int visualizaciones) {
+  this.visualizaciones = visualizaciones;
+ }
 
-    public void setRespuestaPDFmostrar(byte[] respuestaPDFmostrar) {
-        this.respuestaPDFmostrar = respuestaPDFmostrar;
-    }
+ public byte[] getRespuestaPDFmostrar() {
+  return respuestaPDFmostrar;
+ }
 
-    public InputStream getRespuestaPDF() {
-        return respuestaPDF;
-    }
+ public void setRespuestaPDFmostrar(byte[] respuestaPDFmostrar) {
+  this.respuestaPDFmostrar = respuestaPDFmostrar;
+ }
 
-    public void setRespuestaPDFmostrar(InputStream respuestaPDF) {
-        this.respuestaPDF = respuestaPDF;
-    }
+ public InputStream getRespuestaPDF() {
+  return respuestaPDF;
+ }
 
-    public String getRespuestaComen() {
-        return respuestaComen;
-    }
+ public void setRespuestaPDFmostrar(InputStream respuestaPDF) {
+  this.respuestaPDF = respuestaPDF;
+ }
 
-    public void setRespuestaComen(String respuestaComen) {
-        this.respuestaComen = respuestaComen;
-    }
+ public String getRespuestaComen() {
+  return respuestaComen;
+ }
 
-    public int getIdEstado() {
-        return idEstado;
-    }
+ public void setRespuestaComen(String respuestaComen) {
+  this.respuestaComen = respuestaComen;
+ }
 
-    public void setIdEstado(int idEstado) {
-        this.idEstado = idEstado;
-    }
+ public int getIdEstado() {
+  return idEstado;
+ }
 
-    public int getIdPrioridad() {
-        return idPrioridad;
-    }
+ public void setIdEstado(int idEstado) {
+  this.idEstado = idEstado;
+ }
 
-    public void setIdPrioridad(int idPrioridad) {
-        this.idPrioridad = idPrioridad;
-    }
+ public prioridadVO getIdPrioridad() {
+  return idPrioridad;
+ }
 
-    public Date getFechaRadicacion() {
-        return fechaRadicacion;
-    }
+ public void setIdPrioridad(prioridadVO idPrioridad) {
+  this.idPrioridad = idPrioridad;
+ }
 
-    public void setFechaRadicacion(Date fechaRadicacion) {
-        this.fechaRadicacion = fechaRadicacion;
-    }
+ public Date getFechaRadicacion() {
+  return fechaRadicacion;
+ }
 
-    public int getIdOficina() {
-        return idOficina;
-    }
+ public void setFechaRadicacion(Date fechaRadicacion) {
+  this.fechaRadicacion = fechaRadicacion;
+ }
 
-    public void setIdOficina(int idOficina) {
-        this.idOficina = idOficina;
-    }
+ public oficinaVO getIdOficina() {
+  return idOficina;
+ }
 
-    public int getIdtipoDocumento() {
-        return idtipoDocumento;
-    }
+ public void setIdOficina(oficinaVO idOficina) {
+  this.idOficina = idOficina;
+ }
 
-    public void setIdtipoDocumento(int idtipoDocumento) {
-        this.idtipoDocumento = idtipoDocumento;
-    }
+ public tipoDocumentoVO getIdtipoDocumento() {
+  return idtipoDocumento;
+ }
+
+ public void setIdtipoDocumento(tipoDocumentoVO idtipoDocumento) {
+  this.idtipoDocumento = idtipoDocumento;
+ }
 
 }//fin clase documentoVO

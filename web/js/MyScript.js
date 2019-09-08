@@ -1,8 +1,6 @@
 $(document).ready(function () {
- $('#listarRecibidos').click(function () {
-  console.log("Cargando recibidos");
-  $("#contenido").load("listarRecibidos.jsp");
- });
+ console.log("Cargando recibidos");
+ $("#contenido").load("listarRecibidos.jsp");
  $('#listarOficinas').click(function () {
   console.log("Cargando oficinas");
   $("#contenido").load("listarOficinas.jsp");
@@ -15,27 +13,27 @@ $(document).ready(function () {
   console.log("Cargando remitentes");
   $("#contenido").load("listarRemitentes.jsp");
  });
-  $('#documento').click(function () {
-    console.log("Cargando documento");
-    $("#contenido").load("http://localhost:8086/Nexdoc/pdf?idDocumento=2");
-  });
+ $('#listarRecibidos').click(function () {
+  console.log("Cargando recibidos");
+  $("#contenido").load("listarRecibidos.jsp");
+ });
+ $('#listarEnviados').click(function () {
+  console.log("Cargando enviados");
+  $("#contenido").load("listarEnviados.jsp");
+ });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$("tr[name=idDocumento]").click(function () {
+ $.ajax({
+  method: "post",
+  url: 'ControladorDocumento',
+  data: {idDocumento: $("#idDocumento").val(), accion: "Mostrar"}
+ })
+         .done(function (result) {
+          console.log("Cargando documento seleccionado");
+          $("#contenido").html(result);
+         });
+});
 
 //$("input[name=Ingresar]").click(function () {
 // $.ajax({
@@ -48,25 +46,3 @@ $(document).ready(function () {
 //         });
 //});
 //
-//$("input[name=idDocumento]").click(function () {
-// $.ajax({
-//  method: "post",
-//  url: 'pdf',
-//  data: {idDocumento: $("#idDocumento").val()}
-// })
-//         .done(function (result) {
-//          console.log("Cargando documento seleccionado");
-//          $("#contenido").load(result);
-//         });
-//});
-//listarFuncionariosPorOficina();
-//function listarFuncionariosPorOficina() {
-//  $.ajax({
-//    method: "post",
-//    url: "ControladorPersona",
-//    data: {idOficina: $("#cbooficina").val(), accion: $("listar")}
-//  })
-//          .done(function (result) {
-//            $("#cbodestinatario").html(result);
-//          });
-//}

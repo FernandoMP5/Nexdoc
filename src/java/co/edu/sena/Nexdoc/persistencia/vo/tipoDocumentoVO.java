@@ -1,5 +1,5 @@
 /** @author Sena */
-package co.edu.sena.Nexdoc.persistensia.vo;
+package co.edu.sena.Nexdoc.persistencia.vo;
 
 public class tipoDocumentoVO {
 

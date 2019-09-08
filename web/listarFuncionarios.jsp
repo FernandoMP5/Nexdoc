@@ -15,22 +15,10 @@
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Listar Funcionario</title>
-  <link rel="stylesheet" href="css/tablas.css">
  </head>
  <body>
-  <div class="cuerpo">
-   <center>                
-    <div id="formContentrecibidos"></br>
-     <h1>Funcionarios</h1><br>
-     <div class="buscar">
-      <labe><b>Buscar:</b></labe>
-      <input type="text" placeholder="Documento">
-      <a type="button" href="">Buscar</a>
-     </div>
-     <div class="agregar">
-      <a type="button" href="" id="Agregar">+ Agregar</a>
-     </div>
-     <table border="0" class="Recibidos">
+     <h1 style="text-align: center">Funcionarios</h1><br>
+     <table class="table table-hover table-striped">
       <thead>
        <tr>
         <th>Nombre</th>
@@ -65,7 +53,5 @@
     </div>
    </center>
   </div>
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script src="js/MyScript.js" type="text/javascript"></script>
  </body>
 </html>

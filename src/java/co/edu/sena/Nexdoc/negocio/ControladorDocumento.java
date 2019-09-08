@@ -2,20 +2,15 @@ package co.edu.sena.Nexdoc.negocio;
 
 import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
 import co.edu.sena.Nexdoc.persistencia.dao.documentoDAO;
-import co.edu.sena.Nexdoc.persistencia.dao.personaDAO;
 import co.edu.sena.Nexdoc.persistencia.vo.documentoVO;
 import co.edu.sena.Nexdoc.persistencia.vo.personaVO;
-import co.edu.sena.Nexdoc.persistensia.vo.oficinaVO;
-import co.edu.sena.Nexdoc.persistensia.vo.tipoDocumentoVO;
-import java.io.ByteArrayInputStream;
+import co.edu.sena.Nexdoc.persistencia.vo.oficinaVO;
+import co.edu.sena.Nexdoc.persistencia.vo.prioridadVO;
+import co.edu.sena.Nexdoc.persistencia.vo.tipoDocumentoVO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -39,8 +34,9 @@ public class ControladorDocumento extends HttpServlet {
  tipoDocumentoVO tipoDocumentoVO = new tipoDocumentoVO();
  oficinaVO oficinaVO = new oficinaVO();
  personaVO personaVO = new personaVO();
+ prioridadVO prioridadVO = new prioridadVO();
  documentoDAO documentoDAO = new documentoDAO(con);
- personaDAO personaDAO = new personaDAO(con);
+ String oficinas = "listarOficinas.jsp";
 
  public ControladorDocumento() throws Exception {
   this.documentoDAO = new documentoDAO(cn.conectar());
@@ -49,17 +45,7 @@ public class ControladorDocumento extends HttpServlet {
  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
   response.setContentType("text/html;charset=UTF-8");
-  try (PrintWriter out = response.getWriter()) {
-   out.println("<!DOCTYPE html>");
-   out.println("<html>");
-   out.println("<head>");
-   out.println("<title>Servlet ControladorDocumento</title>");
-   out.println("</head>");
-   out.println("<body>");
-   out.println("<h1>Servlet ControladorDocumento at " + request.getContextPath() + "</h1>");
-   out.println("</body>");
-   out.println("</html>");
-  }
+  doPost(request, response);
  }
 
  @Override
@@ -75,10 +61,9 @@ public class ControladorDocumento extends HttpServlet {
   personaVO persona = (personaVO) misession.getAttribute("personaVO");
   String acceso = "";
   String accion = request.getParameter("accion");
-  String prueba = "login.jsp";
   switch (accion) {
    case "Radicar Documento":
-    String remitente = request.getParameter("txtremitente");
+    String remitente = request.getParameter("idRemitente");
     int idtipodocumento = Integer.parseInt(request.getParameter("cbotipodocumento"));
     String destinatario = request.getParameter("cbodestinatario");
     int idoficina = Integer.parseInt(request.getParameter("cbooficina"));
@@ -96,12 +81,24 @@ public class ControladorDocumento extends HttpServlet {
     } catch (Exception ex) {
      System.out.println("documento: " + ex.getMessage());
     }
-    documentoVO.setIdRemitente(remitente);
-    documentoVO.setIdtipoDocumento(idtipodocumento);
-    documentoVO.setIdDestinatario(destinatario);
-    documentoVO.setIdRecepcionista(idRecepcionista);
-    documentoVO.setIdOficina(idoficina);
-    documentoVO.setIdPrioridad(prioridad);
+
+    personaVO.setNumeroIdentificacion(remitente);
+    documentoVO.setIdRemitente(personaVO);
+
+    tipoDocumentoVO.setIdtipoDocumento(idtipodocumento);
+    documentoVO.setIdtipoDocumento(tipoDocumentoVO);
+
+    personaVO.setNumeroIdentificacion(destinatario);
+    documentoVO.setIdDestinatario(personaVO);
+
+    personaVO.setNumeroIdentificacion(idRecepcionista);
+    documentoVO.setIdRecepcionista(personaVO);
+
+    oficinaVO.setIdOficina(idoficina);
+    documentoVO.setIdOficina(oficinaVO);
+
+    prioridadVO.setIdPrioridad(prioridad);
+    documentoVO.setIdPrioridad(prioridadVO);
     if (inputStream != null) {
      documentoVO.setDocumentoPDF(inputStream);
     }
@@ -111,11 +108,16 @@ public class ControladorDocumento extends HttpServlet {
      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
     }
     break;
+   case "Mostrar":
+    String vistaDocumento = "vistaDocumento.jsp";
+    request.setAttribute("idDocumento", request.getParameter("idDocumento"));
+    acceso = vistaDocumento;
+    break;
    default:
     throw new AssertionError();
   }
-//    RequestDispatcher vista = request.getRequestDispatcher(acceso);
-//    vista.forward(request, response);
+  RequestDispatcher vista = request.getRequestDispatcher(acceso);
+  vista.forward(request, response);
  }
 
  @Override

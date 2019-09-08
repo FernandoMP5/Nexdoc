@@ -45,3 +45,5 @@ SELECT CONCAT(nombre,' ',apellido)nombre,numeroIdentificacion
 FROM persona WHERE rol > 1 AND oficina=2
 
 SELECT documentoPDF FROM documento
+
+SELECT CONCAT(p.nombre,' ',p.apellido)nombre,d.idDocumento,d.visualizaciones,d.fechaRadicacion,r.descripcion,o.nombreOficina,t.descripcion FROM documento d INNER JOIN persona p ON d.`idRemitente`=p.`numeroIdentificacion` INNER JOIN oficina o ON d.`idOficina`=o.idOficina INNER JOIN prioridad r ON d.idPrioridad=r.idPrioridad INNER JOIN tipoDocumento t ON d.`idtipoDocumento`=t.`idtipoDocumento` WHERE idDestinatario=1000225552

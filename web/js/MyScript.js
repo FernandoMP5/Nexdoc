@@ -1,9 +1,9 @@
 $(document).ready(function () {
- console.log("Cargando recibidos");
- $("#contenido").load("listarRecibidos.jsp");
- $('#listarOficinas').click(function () {
-  console.log("Cargando oficinas");
-  $("#contenido").load("listarOficinas.jsp");
+// console.log("Cargando recibidos");
+// $("#contenido").load("listarRecibidos.jsp");
+ $('#radicar').click(function () {
+  console.log("Cargando formulario radicar");
+  $("#contenido").load("radicarDocumento.jsp");
  });
  $('#listarFuncionarios').click(function () {
   console.log("Cargando funcionarios");
@@ -12,6 +12,10 @@ $(document).ready(function () {
  $('#listarRemitentes').click(function () {
   console.log("Cargando remitentes");
   $("#contenido").load("listarRemitentes.jsp");
+ });
+ $('#listarOficinas').click(function () {
+  console.log("Cargando Oficinas");
+  $("#contenido").load("listarOficinas.jsp");
  });
  $('#listarRecibidos').click(function () {
   console.log("Cargando recibidos");
@@ -23,26 +27,16 @@ $(document).ready(function () {
  });
 });
 
-$("tr[name=idDocumento]").click(function () {
+
+function mostrarPDF(idDocumento) {
  $.ajax({
   method: "post",
   url: 'ControladorDocumento',
-  data: {idDocumento: $("#idDocumento").val(), accion: "Mostrar"}
+  data: {idDocumento: idDocumento, path: "/seleccionarDocumento"}
  })
          .done(function (result) {
           console.log("Cargando documento seleccionado");
           $("#contenido").html(result);
          });
-});
-
-//$("input[name=Ingresar]").click(function () {
-// $.ajax({
-//  method: "post",
-//  url: 'ControladorPersona',
-//  data: {usuario: $("#txtusuario").val(), clave: $("#txtclave").val(), accion: $("#btningresar").val()}
-// })
-//         .done(function (result) {
-//          $("login.jsp").html(result);
-//         });
-//});
-//
+}
+;

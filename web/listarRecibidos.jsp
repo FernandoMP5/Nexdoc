@@ -39,14 +39,14 @@
       <%
        Conexion cn = new Conexion();
        documentoDAO documentoDAO = new documentoDAO(cn.conectar());
-       List<documentoVO> listarRecibidos = documentoDAO.recibidos(personaVO.getNumeroIdentificacion());
+       List<documentoVO> listarRecibidos = documentoDAO.recibidos("1000225552");
        Iterator<documentoVO> iteraRecibidos = listarRecibidos.iterator();
        documentoVO documentoVO = null;
        int i = 0;
        while (iteraRecibidos.hasNext()) {
         documentoVO = iteraRecibidos.next();
         if (documentoVO.getVisualizaciones() == 0) {%>
-      <tr id="idDocumento" name="idDocumento" value="<%=documentoVO.getIdDocumento()%>" style="cursor: pointer "> 
+      <tr id="idDocumento" style="cursor: pointer " onclick="mostrarPDF(<%=documentoVO.getIdDocumento()%>);" value="<%=documentoVO.getIdDocumento()%>"> 
        <td><b><%=documentoVO.getIdtipoDocumento().getDescripcion()%></b></td> 
        <td><b><%=documentoVO.getIdRemitente().getNombre()%></b></td>
        <td><b><%=documentoVO.getIdOficina().getNombreOficina()%></b></td> 
@@ -67,5 +67,7 @@
     </table>
    </form>
   </div>
+ <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+     <script src="js/MyScript.js" type="text/javascript"></script>
  </body>
 </html>

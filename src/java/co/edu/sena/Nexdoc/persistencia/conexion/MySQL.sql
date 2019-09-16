@@ -13,6 +13,8 @@ INSERT INTO documento(idDocumento,visualizaciones,idRemitente,idDestinatario,idR
 VALUES (1,1,1000225552,1000225552,1000225552,1,1,NOW(),1,1)
 GO
 
+UPDATE persona SET clave='',usuario='' WHERE numeroIdentificacion = 1000225552
+
 DELETE FROM documento
 WHERE idDocumento=1
 
@@ -33,7 +35,8 @@ INSERT INTO prioridad VALUES (1,'Maxima')
 
 INSERT INTO tipoDocumento VALUES (2,'Contratos')
 
-INSERT INTO persona VALUES (1000225552,1,'MANUEL SEBASTIAN', 'CARDENAS PASCAGAZA', 'sc260101@gmail.com', 7317299, 3138230477, 'TV 13D ESTE #54-37 SUR',1)
+INSERT INTO persona(numeroIdentificacion,tipoIdentificacion,nombre,apellido,correo,telefonoFijo,telefonoCelular,direccion,rol) VALUES (179821027,1,'Maria Fernando', 'Gonzales', 'Gonzales@hotmail.com',
+741258, 147258369, 'Crr 32 45-25',1)
 
 SELECT CONCAT(P.nombre,' ',P.apellido)nombre,P.numeroIdentificacion,P.direccion,P.telefonoFijo,P.telefonoCelular,P.correo,R.descripcion,O.nombreOficina FROM persona P 
 INNER JOIN rol R ON P.rol=R.idRol INNER JOIN oficina O ON O.idOficina=P.oficina

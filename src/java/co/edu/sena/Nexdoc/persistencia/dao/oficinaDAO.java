@@ -53,4 +53,21 @@ public class oficinaDAO {
   }
  }
 
+ public oficinaVO listar1Oficina(String id) throws Exception {
+  sql = "SELECT nombreOficina,idOficina FROM oficina WHERE idOficina=" + id + "";
+  try {
+   ps = con.prepareStatement(sql);
+   rs = ps.executeQuery();
+   oficinaVO oficina = new oficinaVO();
+   while (rs.next()) {
+    oficina.setIdOficina(rs.getInt("idOficina"));
+    oficina.setNombreOficina(rs.getString("nombreOficina"));
+   }
+   return oficina;
+  } catch (SQLException e) {
+   throw new Exception("Error al listar a una oficina " + e);
+  } finally {
+   Conexion.cerrar(ps, rs);
+  }
+ }
 }//fin clase oficinaDAO

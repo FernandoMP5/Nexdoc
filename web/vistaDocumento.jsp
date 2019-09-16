@@ -19,21 +19,25 @@
   <%
    Conexion cn = new Conexion();
    documentoDAO documentoDAO = new documentoDAO(cn.conectar());
-   int idDocumento = Integer.parseInt((String) request.getAttribute("idDocumento"));
+   int idDocumento = Integer.parseInt((String)request.getAttribute("IdOficina"));
    documentoVO documentoVO = (documentoVO) documentoDAO.listarDocumento(idDocumento); 
   %>
   <div id="documento">
    <object data="pdf?idDocumento=<%=documentoVO.getIdDocumento()%>" type="application/pdf"></object>
   </div>
+  <h3 style="text-align: center">Datos del documento</h3></br>
   <div id="info">
-   <label>Id Documento</label><br>
+   <label><b>Id Documento</b></label><br>
    <label><%=documentoVO.getIdDocumento()%></label><br> 
-   <label>Remitente</label><br>
+   <label><b>Remitente</b></label><br>
    <label><%=documentoVO.getIdRemitente().getNombre()%></label><br>
-   <label>Prioridad</label><br>
+   <label><b>Prioridad</b></label><br>
    <label><%=documentoVO.getIdPrioridad().getDescripcion()%></label><br>  
-   <label>Fecha Radicacion</label><br>
+   <label><b>Fecha Radicacion</b></label><br>
    <label><%=documentoVO.getFechaRadicacion()%></label><br>
+  </div>
+  <div class="respuesta">
+   <input type="button" value="Redactar respuesta">
   </div>
  </body>
 </html>

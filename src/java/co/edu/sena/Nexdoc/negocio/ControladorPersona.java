@@ -3,12 +3,12 @@ package co.edu.sena.Nexdoc.negocio;
 import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
 import co.edu.sena.Nexdoc.persistencia.dao.personaDAO;
 import co.edu.sena.Nexdoc.persistencia.vo.personaVO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +21,9 @@ public class ControladorPersona extends HttpServlet {
  Conexion cn = new Conexion();
  personaVO personaVO = new personaVO();
  personaDAO personaDAO = new personaDAO(con);
- String inicio = "inicio.jsp";
- String login = "login.jsp";
- int r;
+ Gson json = new Gson();
+ String gson;
+ PrintWriter out;
 
  public ControladorPersona() throws Exception {
   this.personaDAO = new personaDAO(cn.conectar());
@@ -31,17 +31,174 @@ public class ControladorPersona extends HttpServlet {
 
  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
-  response.setContentType("text/html;charset=UTF-8");
-  try (PrintWriter out = response.getWriter()) {
-   out.println("<!DOCTYPE html>");
-   out.println("<html>");
-   out.println("<head>");
-   out.println("<title>Servlet ControladorPersona</title>");
-   out.println("</head>");
-   out.println("<body>");
-   out.println("<h1>Servlet ControladorPersona at " + request.getContextPath() + "</h1>");
-   out.println("</body>");
-   out.println("</html>");
+  String path = request.getParameter("path");
+  switch (path) {
+   case "/iniciarSesion":
+    iniciarSesion(request, response);
+    break;
+   case "/registrarRemitente":
+    registrarRemitente(request, response);
+    break;
+   case "/registrarFuncionario":
+    registrarFuncionario(request, response);
+    break;
+   case "/actualizarRemitente":
+    actualizarRemitente(request, response);
+    break;
+   case "/actualizarFuncionario":
+    actualizarFuncionario(request, response);
+    break;
+   default:
+    throw new AssertionError();
+  }
+  out = response.getWriter();
+  out.print(gson);
+  out.flush();
+ }
+
+ public void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  int resultado;
+  String usuario = request.getParameter("usuario");
+  String contraseña = request.getParameter("clave");
+  personaVO.setUsuario(usuario);
+  personaVO.setClave(contraseña);
+  try {
+   resultado = personaDAO.validar(personaVO);
+   if (resultado == 1) {
+    HttpSession misession = request.getSession(true);
+    misession.setAttribute("personaVO", personaVO);
+    int rol = personaVO.getRol();
+    gson = json.toJson(rol);
+   } else {
+    gson = json.toJson(resultado);
+   }
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+  }
+ }
+
+ public void registrarRemitente(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  boolean resultado = false;
+  String nombre = request.getParameter("txtnombre");
+  String apellido = request.getParameter("txtapellido");
+  int tipoIdentificacion = Integer.parseInt(request.getParameter("cbotipoidentificacion"));
+  String numeroIdentificacion = request.getParameter("txtdocumento");
+  String correo = request.getParameter("txtcorreo");
+  double telefonoFijo = Integer.parseInt(request.getParameter("txttelefonoFijo"));
+  double telefonoCelular = Integer.parseInt(request.getParameter("txttelefonoCelular"));
+  String direccion = request.getParameter("txtdireccion");
+  personaVO.setNumeroIdentificacion(numeroIdentificacion);
+  personaVO.setTipoIdentificacion(tipoIdentificacion);
+  personaVO.setNombre(nombre);
+  personaVO.setApellido(apellido);
+  personaVO.setCorreo(correo);
+  personaVO.setTelefonoFijo(telefonoFijo);
+  personaVO.setTelefonoCelular(telefonoCelular);
+  personaVO.setDireccion(direccion);
+  try {
+   resultado = personaDAO.registrarRemitente(personaVO);
+   gson = json.toJson(resultado);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+  }
+ }
+
+ public void registrarFuncionario(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  boolean resultado = false;
+  String nombre = request.getParameter("txtnombre");
+  String apellido = request.getParameter("txtapellido");
+  int tipoIdentificacion = Integer.parseInt(request.getParameter("cbotipoidentificacion"));
+  String numeroIdentificacion = request.getParameter("txtdocumento");
+  String correo = request.getParameter("txtcorreo");
+  double telefonoFijo = Integer.parseInt(request.getParameter("txttelefonoFijo"));
+  double telefonoCelular = Integer.parseInt(request.getParameter("txttelefonoCelular"));
+  String direccion = request.getParameter("txtdireccion");
+  int rol = Integer.parseInt(request.getParameter("cbocargo"));
+  int idOficina = Integer.parseInt(request.getParameter("cbooficina"));
+  String usuario = request.getParameter("txtusuario");
+  String clave = request.getParameter("txtclave");
+  personaVO.setNumeroIdentificacion(numeroIdentificacion);
+  personaVO.setTipoIdentificacion(tipoIdentificacion);
+  personaVO.setNombre(nombre);
+  personaVO.setApellido(apellido);
+  personaVO.setCorreo(correo);
+  personaVO.setTelefonoFijo(telefonoFijo);
+  personaVO.setTelefonoCelular(telefonoCelular);
+  personaVO.setDireccion(direccion);
+  personaVO.setRol(rol);
+  personaVO.setUsuario(usuario);
+  personaVO.setClave(clave);
+  personaVO.setOficina(idOficina);
+  try {
+   resultado = personaDAO.registrarFuncionario(personaVO);
+   gson = json.toJson(resultado);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+  }
+ }
+
+ public void actualizarFuncionario(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  boolean resultado = false;
+  String nombre = request.getParameter("txtnombre");
+  String apellido = request.getParameter("txtapellido");
+  int tipoIdentificacion = Integer.parseInt(request.getParameter("cbotipoidentificacion"));
+  String numeroIdentificacion = request.getParameter("txtdocumento");
+  String correo = request.getParameter("txtcorreo");
+  double telefonoFijo = Integer.parseInt(request.getParameter("txttelefonoFijo"));
+  double telefonoCelular = Integer.parseInt(request.getParameter("txttelefonoCelular"));
+  String direccion = request.getParameter("txtdireccion");
+  int rol = Integer.parseInt(request.getParameter("cbocargo"));
+  int idOficina = Integer.parseInt(request.getParameter("cbooficina"));
+  String usuario = request.getParameter("txtusuario");
+  String clave = request.getParameter("txtclave");
+  personaVO.setNumeroIdentificacion(numeroIdentificacion);
+  personaVO.setTipoIdentificacion(tipoIdentificacion);
+  personaVO.setNombre(nombre);
+  personaVO.setApellido(apellido);
+  personaVO.setCorreo(correo);
+  personaVO.setTelefonoFijo(telefonoFijo);
+  personaVO.setTelefonoCelular(telefonoCelular);
+  personaVO.setDireccion(direccion);
+  personaVO.setRol(rol);
+  personaVO.setUsuario(usuario);
+  personaVO.setClave(clave);
+  personaVO.setOficina(idOficina);
+  try {
+   personaDAO.actualizarFuncionario(numeroIdentificacion, personaVO);
+   gson = json.toJson(resultado);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+  }
+ }
+
+ public void actualizarRemitente(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  boolean resultado = false;
+  String nombre = request.getParameter("txtnombre");
+  String apellido = request.getParameter("txtapellido");
+  int tipoIdentificacion = Integer.parseInt(request.getParameter("cbotipoidentificacion"));
+  String numeroIdentificacion = request.getParameter("txtdocumento");
+  String correo = request.getParameter("txtcorreo");
+  double telefonoFijo = Integer.parseInt(request.getParameter("txttelefonoFijo"));
+  double telefonoCelular = Integer.parseInt(request.getParameter("txttelefonoCelular"));
+  String direccion = request.getParameter("txtdireccion");
+  personaVO.setNumeroIdentificacion(numeroIdentificacion);
+  personaVO.setTipoIdentificacion(tipoIdentificacion);
+  personaVO.setNombre(nombre);
+  personaVO.setApellido(apellido);
+  personaVO.setCorreo(correo);
+  personaVO.setTelefonoFijo(telefonoFijo);
+  personaVO.setTelefonoCelular(telefonoCelular);
+  personaVO.setDireccion(direccion);
+  try {
+   personaDAO.actualizarRemitente(numeroIdentificacion, personaVO);
+   gson = json.toJson(resultado);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
   }
  }
 
@@ -54,98 +211,7 @@ public class ControladorPersona extends HttpServlet {
  @Override
  protected void doPost(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
-  r = 0;
-  String acceso = "";
-  String accion = request.getParameter("accion");
-  switch (accion) {
-   case "Ingresar":
-    try {
-     String usuario = request.getParameter("txtusuario");
-     String contraseña = request.getParameter("txtclave");
-     personaVO.setUsuario(usuario);
-     personaVO.setClave(contraseña);
-     r = personaDAO.validar(personaVO);
-     if (r == 1) {
-      HttpSession misession = request.getSession(true);
-      misession.setAttribute("personaVO", personaVO);
-      acceso = inicio;
-     } else {
-      acceso = login;
-     }
-    } catch (Exception ex) {
-     Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    break;
-   case "Registrar Persona":
-    String nombre = request.getParameter("txtnombre");
-    String apellido = request.getParameter("txtapellido");
-    int tipoIdentificacion = Integer.parseInt(request.getParameter("cbotipoidentificacion"));
-    String numeroIdentificacion = request.getParameter("txtdocumento");
-    String correo = request.getParameter("txtcorreo");
-    double telefonoFijo = Integer.parseInt(request.getParameter("txttelefonoFijo"));
-    double telefonoCelular = Integer.parseInt(request.getParameter("txttelefonoCelular"));
-    String direccion = request.getParameter("txtdireccion");
-    int rol = Integer.parseInt(request.getParameter("cbocargo"));
-    int idOficina = Integer.parseInt(request.getParameter("cbooficina"));
-    String usuario = request.getParameter("txtusuario");
-    String clave = request.getParameter("txtclave");
-    personaVO.setNumeroIdentificacion(numeroIdentificacion);
-    personaVO.setTipoIdentificacion(tipoIdentificacion);
-    personaVO.setNombre(nombre);
-    personaVO.setApellido(apellido);
-    personaVO.setCorreo(correo);
-    personaVO.setTelefonoFijo(telefonoFijo);
-    personaVO.setTelefonoCelular(telefonoCelular);
-    personaVO.setDireccion(direccion);
-    personaVO.setRol(rol);
-    personaVO.setUsuario(usuario);
-    personaVO.setClave(clave);
-    personaVO.setOficina(idOficina);
-    try {
-     personaDAO.agregarPersona(personaVO);
-    } catch (Exception ex) {
-     Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    break;
-   case "Editar Funcionario":
-    nombre = request.getParameter("txtnombre");
-    apellido = request.getParameter("txtapellido");
-    tipoIdentificacion = Integer.parseInt(request.getParameter("cbotipoidentificacion"));
-    numeroIdentificacion = request.getParameter("txtdocumento");
-    correo = request.getParameter("txtcorreo");
-    telefonoFijo = Integer.parseInt(request.getParameter("txttelefonoFijo"));
-    telefonoCelular = Integer.parseInt(request.getParameter("txttelefonoCelular"));
-    direccion = request.getParameter("txtdireccion");
-    rol = Integer.parseInt(request.getParameter("cbocargo"));
-    idOficina = Integer.parseInt(request.getParameter("cbooficina"));
-    usuario = request.getParameter("txtusuario");
-    clave = request.getParameter("txtclave");
-    personaVO.setNumeroIdentificacion(numeroIdentificacion);
-    personaVO.setTipoIdentificacion(tipoIdentificacion);
-    personaVO.setNombre(nombre);
-    personaVO.setApellido(apellido);
-    personaVO.setCorreo(correo);
-    personaVO.setTelefonoFijo(telefonoFijo);
-    personaVO.setTelefonoCelular(telefonoCelular);
-    personaVO.setDireccion(direccion);
-    personaVO.setRol(rol);
-    personaVO.setUsuario(usuario);
-    personaVO.setClave(clave);
-    personaVO.setOficina(idOficina);
-    try {
-     personaDAO.actualizarPersona(numeroIdentificacion, personaVO);
-    } catch (Exception ex) {
-     Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    break;
-   case "listar":
-    request.setAttribute("idOficina", request.getParameter("idOficina"));
-    break;
-   default:
-    throw new AssertionError();
-  }
-  RequestDispatcher vista = request.getRequestDispatcher(acceso);
-  vista.forward(request, response);
+  processRequest(request, response);
  }
 
  @Override

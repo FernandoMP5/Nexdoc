@@ -17,7 +17,7 @@
   <title>Listar Área</title>
  </head>
  <body>
-  <h1>Oficinas</h1><br>
+  <h1 style="text-align: center">Oficinas</h1><br>
   <table class="table table-hover table-striped">
    <thead>
     <tr>
@@ -35,7 +35,7 @@
      oficinaVO = iteraOficinas.next();
    %>
    <tbody>
-    <tr>
+    <tr class="seleccionar" value="<%=oficinaVO.getIdOficina()%>" style="cursor: pointer" onclick="seleccionarOficina(<%=oficinaVO.getIdOficina()%>)">
      <td><%=oficinaVO.getNombreOficina()%></td>
      <td><%=oficinaVO.getTelefonoOficina()%></td>
     </tr>

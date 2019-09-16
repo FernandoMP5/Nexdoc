@@ -39,7 +39,7 @@
         personaVO = iteraFuncionarios.next();
       %>
       <tbody>
-       <tr>
+       <tr class="seleccionar" value="<%=personaVO.getNumeroIdentificacion()%>" style="cursor: pointer" onclick="seleccionarDestinatario(<%=personaVO.getNumeroIdentificacion()%>)">
         <td><%=personaVO.getNombre()%></td>
         <td><%=personaVO.getNumeroIdentificacion()%></td>
         <td><%=personaVO.getCorreo()%></td>

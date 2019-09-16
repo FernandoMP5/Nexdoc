@@ -19,7 +19,17 @@
   <title>Listar Remitentes</title>
  </head>
  <body>
-  <h1 style="text-align: center">Remitentes</h1><br>
+  <%
+   HttpSession misession = (HttpSession) request.getSession();
+   personaVO persona = (personaVO) misession.getAttribute("personaVO");
+  %>
+  <h1 style="text-align: center;">Seleccione el remitente 
+   <%
+    if (persona.getRol() == 2) {
+   %>
+   <input type="button" class="btn btn-warning" value="Registrar" style="padding: 5px; width: 60px; margin-left: 25%">
+   <%}%></h1><br>
+
   <table class="table table-hover table-striped">
    <thead>
     <tr>
@@ -27,8 +37,12 @@
      <th>Documento</th>
      <th>Correo</th>
      <th>Direccion</th>
-     <th>Telefon Fijo</th>
      <th>Telefon Celular</th>
+      <%
+       if (persona.getRol() == 2) {
+      %>
+     <th>Actualizar</th>
+      <%}%>
     </tr>
    </thead>
    <tbody>
@@ -41,16 +55,24 @@
      while (iteraRemitentes.hasNext()) {
       personaVO = iteraRemitentes.next();
     %>
-    <tr id="idRemitente" name="idRemitente" value="<%=personaVO.getNumeroIdentificacion()%>" style="cursor: pointer" onclick="radicar()">
-    <td><%=personaVO.getNombre()%></td>
-    <td><%=personaVO.getNumeroIdentificacion()%></td>
-    <td><%=personaVO.getCorreo()%></td>
-    <td><%=personaVO.getDireccion()%></td>
-    <td><%=personaVO.getTelefonoFijo()%></td>
-    <td><%=personaVO.getTelefonoCelular()%></td>
-  </tr>
-  <%}%>
- </tbody>
-</table>
-</body>
+   <tr class="seleccionar" value="<%=personaVO.getNumeroIdentificacion()%>" style="cursor: pointer" onclick="seleccionarRemitente(<%=personaVO.getNumeroIdentificacion()%>)">
+     <td><%=personaVO.getNombre()%></td>
+     <td><%=personaVO.getNumeroIdentificacion()%></td>
+     <td><%=personaVO.getCorreo()%></td>
+     <td><%=personaVO.getDireccion()%></td>
+     <td><%=personaVO.getTelefonoCelular()%></td>
+     <%
+      if (persona.getRol() == 2) {
+     %>
+     <td><button type="button" class="btn btn-danger" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button></td>
+     <%}%>
+
+    </tr>
+    <%}%>
+   </tbody>
+  </table>
+  <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+  <script>
+    </script>
+ </body>
 </html>

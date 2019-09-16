@@ -9,8 +9,17 @@ body{
  flex-direction: column;
  width: 100%;
 }
-tr{
- cursor:pointer;
+input[type=button],input[type=submit]{
+ background-color: rgb(233,147,26);
+ border-color: rgb(233,147,26);
+}
+input[type=button]:hover,input[type=submit]:hover{
+ background-color: grey;
+ border-color: grey;
+}
+.error{
+  color:red;
+  font-size: 10px;
 }
 /*---------------------------------- Menu ----------------------------------*/
 .navegacion{
@@ -51,19 +60,19 @@ tr{
 	margin-top: 30px;
 }
 
-@media screen and (max-width: 1500px){
+@media screen and (max-width: 2000px){
 	.navegacion nav{
 		position: absolute;
 		left: -20%;
 		width: 25%;
- height: 100vh;
+  height: 85vh;
 		display: block;
-  border-right: 1px solid rgba(0,0,0,0.3);
+  border-right: 1px solid rgba(0,0,0,0.1);
 	}
 
 	.menu li{
 		display: block;
-  border-bottom: 1px solid rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 	}
 }
 /*---------------------------------- Login ----------------------------------*/
@@ -149,9 +158,9 @@ div.pie{
  color: white;
  margin: 0px;
 }
-div#contenido{
+#contenido{
  width: 95%;
- height: 100vh;
+ height: 84vh;
  margin-left: 5%;
  margin-top: 10px;
 }
@@ -163,9 +172,30 @@ a{
  height: 25px;
  float: right;
 }
-.encabezado{
- width:130px; 
- height:65px;
- padding: 5px;
- margin-bottom: -10px;
+#encabezado{
+ width:150px;
+ padding: 3px;
+ margin-bottom: -13px;
+}
+#p{
+ text-align: center;
+ color: white;
+ cursor:pointer;
+}
+div#divFile{
+ width:120px;
+ height: 26px;
+ position: relative;
+ cursor:pointer;
+}
+input#documento{
+ position: absolute;
+ top:0px;
+ left:0px;
+ rigth:0px;
+ botton:0px;
+ height: 100%;
+ width: 100%;
+ opacity: 0;
+ cursor:pointer;
 }

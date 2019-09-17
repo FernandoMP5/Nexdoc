@@ -1,6 +1,4 @@
 $(document).ready(function () {
-// console.log("Cargando recibidos");
-// $("#contenido").load("listarRecibidos.jsp");
  $('#radicar').click(function () {
   console.log("Cargando formulario radicar");
   $("#contenido").load("radicarDocumento.jsp");

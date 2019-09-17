@@ -13,11 +13,11 @@ $(document).ready(function () {
    $(".contenido").animate({'margin-left': '0%'});
   }
  });
-
+//Modal
  $(".modal-content div").click(function (e) {
   if ($(".modal-content div").attr('class') === 'modal-header prueba') {
    $(".modal-content div").removeClass('prueba').addClass('cancel');
-   $(".modal").animate({'margin-top': '27%'});
+   $(".modal").animate({'margin-top': '26%'});
   } else {
    $(".modal-content div").removeClass('cancel').addClass('prueba');
    $(".modal").animate({'margin-top': '0%'});

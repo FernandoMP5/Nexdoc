@@ -1,7 +1,7 @@
 *{
  margin: 0px;
  padding: 0px;
- font-size: 11px;
+ font-size: 13px;
 }
 
 body{
@@ -10,16 +10,37 @@ body{
  width: 100%;
 }
 input[type=button],input[type=submit]{
- background-color: rgb(233,147,26);
- border-color: rgb(233,147,26);
+ background-color: rgb(260,180,20);
+ border-color: rgb(260,180,20);
 }
 input[type=button]:hover,input[type=submit]:hover{
  background-color: grey;
  border-color: grey;
+ color: white;
+}
+button[type=button]{
+ background-color: grey;
+ border-color: grey;
+ color: white;
+}
+button[type=button]:hover{
+ background-color: rgb(260,180,20);
+ border-color: rgb(260,180,20);
+ color: white;
+}
+button[type=submit]{
+ background-color: rgb(260,180,20);
+ border-color: rgb(260,180,20);
+ color: white;
+}
+button[type=submit]:hover{
+ background-color: grey;
+ border-color: grey;
+ color: white;
 }
 .error{
-  color:red;
-  font-size: 10px;
+ color:red;
+ font-size: 10px;
 }
 /*---------------------------------- Menu ----------------------------------*/
 .navegacion{
@@ -50,14 +71,7 @@ input[type=button]:hover,input[type=submit]:hover{
 }
 
 .menu li a:hover{
-	background: rgba(0,0,0,0.1);
-}
-
-.text{
-	width: 90%;
-	max-width: 1200px;
-	margin: auto;
-	margin-top: 30px;
+ background-color: rgb(260,180,20);
 }
 
 @media screen and (max-width: 2000px){
@@ -69,7 +83,6 @@ input[type=button]:hover,input[type=submit]:hover{
 		display: block;
   border-right: 1px solid rgba(0,0,0,0.1);
 	}
-
 	.menu li{
 		display: block;
   border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -168,34 +181,14 @@ a{
  cursor: pointer;
 }
 .icono{
- width: 25px;
- height: 25px;
+ width: 30px;
+ height: 30px;
  float: right;
+ margin-top: -6px;
+ margin-right: -0%;
 }
 #encabezado{
- width:150px;
+ width:190px;
  padding: 3px;
  margin-bottom: -13px;
-}
-#p{
- text-align: center;
- color: white;
- cursor:pointer;
-}
-div#divFile{
- width:120px;
- height: 26px;
- position: relative;
- cursor:pointer;
-}
-input#documento{
- position: absolute;
- top:0px;
- left:0px;
- rigth:0px;
- botton:0px;
- height: 100%;
- width: 100%;
- opacity: 0;
- cursor:pointer;
 }

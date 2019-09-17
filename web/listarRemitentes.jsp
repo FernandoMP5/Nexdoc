@@ -22,14 +22,14 @@
   <%
    HttpSession misession = (HttpSession) request.getSession();
    personaVO persona = (personaVO) misession.getAttribute("personaVO");
+   if (persona.getRol() == 2) {
   %>
-  <h1 style="text-align: center;">Seleccione el remitente 
-   <%
-    if (persona.getRol() == 2) {
-   %>
-   <input type="button" class="btn btn-warning" value="Registrar" style="padding: 5px; width: 60px; margin-left: 25%">
-   <%}%></h1><br>
-
+  <h1 style="text-align: center;">Seleccione el remitente
+   <input type="button" class="btn" value="Registrar" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
+   <%} else if (persona.getRol() == 4) {%>
+  <h1 style="text-align: center;">Remitentes
+   <input type="button" class="btn" value="Registrar" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
+  <%}%>
   <table class="table table-hover table-striped">
    <thead>
     <tr>
@@ -42,6 +42,8 @@
        if (persona.getRol() == 2) {
       %>
      <th>Actualizar</th>
+      <%} else if (persona.getRol() == 4) {%>
+     <th>Acciones</th>
       <%}%>
     </tr>
    </thead>
@@ -55,7 +57,7 @@
      while (iteraRemitentes.hasNext()) {
       personaVO = iteraRemitentes.next();
     %>
-   <tr class="seleccionar" value="<%=personaVO.getNumeroIdentificacion()%>" style="cursor: pointer" onclick="seleccionarRemitente(<%=personaVO.getNumeroIdentificacion()%>)">
+    <tr class="seleccionar" value="<%=personaVO.getNumeroIdentificacion()%>" style="cursor: pointer" onclick="seleccionarRemitente(<%=personaVO.getNumeroIdentificacion()%>)">
      <td><%=personaVO.getNombre()%></td>
      <td><%=personaVO.getNumeroIdentificacion()%></td>
      <td><%=personaVO.getCorreo()%></td>
@@ -64,15 +66,17 @@
      <%
       if (persona.getRol() == 2) {
      %>
-     <td><button type="button" class="btn btn-danger" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button></td>
-     <%}%>
-
+     <td><button type="button" class="btn" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button></td>
+     <%} else if (persona.getRol() == 4) {%>
+     <td><button type="button" class="btn" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button>
+      <button type="submit" class="btn" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Inhabilitar</button></td>
+      <%}%>
     </tr>
     <%}%>
    </tbody>
   </table>
   <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
   <script>
-    </script>
+  </script>
  </body>
 </html>

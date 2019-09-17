@@ -70,8 +70,9 @@
         <%}
          if (usuario.getRol() == 4) {
         %>
-      <li><a href="#" id="listarFuncionarios">Administrar Fun<img src="img/registrar.png" class="icono"></a></li>
-      <li><a href="#" id="listaOficinas">Administrar Ofi<img src="img/registrar.png" class="icono"></a></li>
+      <li><a href="#" id="listarRemitentes">Administrar Remitentes<img src="img/registrar.png" class="icono"></a></li>
+      <li><a href="#" id="listarFuncionarios">Administrar Funcionarios<img src="img/registrar.png" class="icono"></a></li>
+      <li><a href="#" id="listarOficinas">Administrar Oficinas<img src="img/registrar.png" class="icono"></a></li>
         <%}%>
     </nav>
    </div>
@@ -136,10 +137,10 @@
 
 <style type="text/css">
  .modal{
-  top: 300px;
+  top: 375px;
   right: 100px;
   bottom: -100px;
-  left: 350px;
+  left: 35%;
   z-index: 10040;
   overflow: auto;
   overflow-y: auto;

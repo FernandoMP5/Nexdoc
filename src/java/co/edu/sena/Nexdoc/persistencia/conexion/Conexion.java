@@ -10,7 +10,7 @@ public class Conexion {
  public static Connection conectar() throws Exception {
   try {
    Class.forName("com.mysql.jdbc.Driver");
-   Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nexdoc", "root", "moreno");
+   Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nexdoc", "root", "");
    return con;
   } catch (Exception e) {
    e.printStackTrace();

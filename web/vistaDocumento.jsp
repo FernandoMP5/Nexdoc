@@ -37,7 +37,7 @@
    <label><%=documentoVO.getFechaRadicacion()%></label><br>
   </div>
   <div class="respuesta">
-   <input type="button" value="Redactar respuesta">
+    <input type="button" value="Redactar respuesta" class="btn">
   </div>
  </body>
 </html>

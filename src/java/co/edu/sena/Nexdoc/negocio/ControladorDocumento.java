@@ -83,9 +83,11 @@ public class ControladorDocumento extends HttpServlet {
  public void seleccionarRemitente(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException, Exception {
   String id = request.getParameter("idRemitente");
+  String respuesta = "";
   try {
    personaVO = personaDAO.listar1Persona(id);
-   gson = json.toJson(personaVO);
+//   gson = respuesta;
+   gson = json.toJson(personaVO.getNumeroIdentificacion());
   } catch (Exception ex) {
    Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }

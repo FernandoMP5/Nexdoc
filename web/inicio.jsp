@@ -99,7 +99,7 @@
      datetype: 'json',
      success: function (resultado1) {
       console.log(resultado1);
-      $("input[name='txtRemitente']").val(resultado1);
+      $("input[name=txtRemitente]").val(resultado1);
 //      $("input[name='txtRemitente']").val(resultado);
      }
     });
@@ -137,10 +137,10 @@
 
 <style type="text/css">
  .modal{
-  top: 375px;
+  top: 430px;
   right: 100px;
   bottom: -100px;
-  left: 35%;
+  left: 39%;
   z-index: 10040;
   overflow: auto;
   overflow-y: auto;

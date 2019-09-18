@@ -66,10 +66,10 @@
      <%
       if (persona.getRol() == 2) {
      %>
-     <td><button type="button" class="btn" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button></td>
+     <td><button type="button" class="btn btn-warning" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button></td>
      <%} else if (persona.getRol() == 4) {%>
-     <td><button type="button" class="btn" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button>
-      <button type="submit" class="btn" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Inhabilitar</button></td>
+     <td><button type="button" class="btn btn-warning" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button>
+      <button type="submit" class="btn btn-danger" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Inhabilitar</button></td>
       <%}%>
     </tr>
     <%}%>

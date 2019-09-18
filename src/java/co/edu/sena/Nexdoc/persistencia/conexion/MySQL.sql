@@ -35,7 +35,7 @@ INSERT INTO prioridad VALUES (1,'Maxima')
 
 INSERT INTO tipoDocumento VALUES (2,'Contratos')
 
-INSERT INTO persona(numeroIdentificacion,tipoIdentificacion,nombre,apellido,correo,telefonoFijo,telefonoCelular,direccion,rol,usuario,clave) VALUES (1007402180,1,'Fabian Andres', 'Moreno Moreno', 'Moreno@gmail.com',3736437, 3219558419, 'CLL 72 B SUR # 89 A 01',4,'Fabian','1007402180')
+INSERT INTO persona(numeroIdentificacion,tipoIdentificacion,nombre,apellido,correo,telefonoFijo,telefonoCelular,direccion,rol,usuario,clave) VALUES (987654321,1,'Prueba Prueba', 'Prueba Prueba', 'Prueba@gmail.com',98765432, 3219558419, '12345678901',2,'Prueba','987654321')
 
 SELECT CONCAT(P.nombre,' ',P.apellido)nombre,P.numeroIdentificacion,P.direccion,P.telefonoFijo,P.telefonoCelular,P.correo,R.descripcion,O.nombreOficina FROM persona P 
 INNER JOIN rol R ON P.rol=R.idRol INNER JOIN oficina O ON O.idOficina=P.oficina

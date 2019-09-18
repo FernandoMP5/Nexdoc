@@ -2,7 +2,7 @@
  float: left;
 }
 #documento > object{
- width: 7%; 
+ width: 70%; 
  height: 86vh;
  margin-top: -10px;
  margin-right:10px;
@@ -13,19 +13,5 @@
 }
 .respuesta{
  float: right; 
-}
-
-input[type="file"]{    
- background-color: rgb(233,147,26);
- border: none;
- color: white;
- padding: 10px 13px;
- text-align: center;
- text-decoration: none;
- display: inline-block;
- font-size: 13px;
- -webkit-border-radius: 5px 5px 5px 5px;
- border-radius: 5px 5px 5px 5px;
- margin-left:35px; 
- float:left;
+ margin-right: 20px;
 }

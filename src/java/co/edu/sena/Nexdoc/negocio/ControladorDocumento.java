@@ -139,12 +139,6 @@ public class ControladorDocumento extends HttpServlet {
           throws ServletException, IOException {
     HttpSession misession = (HttpSession) request.getSession();
     usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
-    String remitente = request.getParameter("idRemitente");
-    int idoficina = Integer.parseInt(request.getParameter("idOficina"));
-    String destinatario = request.getParameter("idDestinatario");
-    int idtipodocumento = Integer.parseInt(request.getParameter("tipoDocumento"));
-    int prioridad = Integer.parseInt(request.getParameter("prioridad"));
-    String idRecepcionista = usuario.getNumeroIdentificacion();
     InputStream inputStream = null;
     try {
       Part filePart = request.getPart("documento");
@@ -157,6 +151,12 @@ public class ControladorDocumento extends HttpServlet {
     } catch (Exception ex) {
       System.out.println("documento: " + ex.getMessage());
     }
+    String remitente = request.getParameter("idRemitente");
+    int idoficina = Integer.parseInt(request.getParameter("idOficina"));
+    String destinatario = request.getParameter("idDestinatario");
+    int prioridad = Integer.parseInt(request.getParameter("cboPrioridad"));
+    int idtipodocumento = Integer.parseInt(request.getParameter("cboTipoDocumento"));
+    String idRecepcionista = usuario.getNumeroIdentificacion();
 
     personaVO.setNumeroIdentificacion(remitente);
     documentoVO.setIdRemitente(personaVO);

@@ -19,7 +19,7 @@
  <body>
   <%
    HttpSession misession = (HttpSession) request.getSession();
-   personaVO personaVO = (personaVO) misession.getAttribute("personaVO");
+   usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
   %>
   <div id="enviados">
    <form action="ControladorDocumento" method="post">
@@ -38,7 +38,7 @@
       <%
        Conexion cn = new Conexion();
        documentoDAO documentoDAO = new documentoDAO(cn.conectar());
-       List<documentoVO> listarRecibidos = documentoDAO.enviados(personaVO.getNumeroIdentificacion());
+       List<documentoVO> listarRecibidos = documentoDAO.enviados(usuario.getNumeroIdentificacion());
        Iterator<documentoVO> iteraRecibidos = listarRecibidos.iterator();
        documentoVO documentoVO = null;
        int i = 0;

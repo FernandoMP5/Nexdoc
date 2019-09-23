@@ -22,55 +22,10 @@ public class personaDAO {
   this.con = con;
  }
 
- public int validar(personaVO personaVO) throws Exception {
-  r = 0;
-  sql = "SELECT * FROM persona WHERE usuario='" + personaVO.getUsuario() + "' AND clave='" + personaVO.getClave() + "'";
-  try {
-   ps = con.prepareStatement(sql);
-   rs = ps.executeQuery();
-   while (rs.absolute(1)) {
-    ++r;
-    personaVO.setNumeroIdentificacion(rs.getString("numeroIdentificacion"));
-    personaVO.setTipoIdentificacion(rs.getInt("tipoIdentificacion"));
-    personaVO.setNombre(rs.getString("nombre"));
-    personaVO.setApellido(rs.getString("apellido"));
-    personaVO.setCorreo(rs.getString("correo"));
-    personaVO.setTelefonoFijo(rs.getDouble("telefonoFijo"));
-    personaVO.setTelefonoCelular(rs.getDouble("telefonoCelular"));
-    personaVO.setDireccion(rs.getString("direccion"));
-    personaVO.setRol(rs.getInt("rol"));
-    personaVO.setUsuario(rs.getString("usuario"));
-    personaVO.setClave(rs.getString("clave"));
-    personaVO.setOficina(rs.getInt("oficina"));
-    if (r == 1) {
-     break;
-    }
-   }
-   if (r == 1) {
-    return 1;
-   } else {
-    return 0;
-   }
-  } catch (SQLException e) {
-   throw new Exception("Error al validar usuario" + e);
-  } finally {
-   Conexion.cerrar(ps, rs);
-  }
- }
-
  public boolean registrarRemitente(personaVO personaVO) throws Exception {
   try {
-   sql = "INSERT INTO persona(numeroIdentificacion,tipoIdentifcicacion,nombre,apellido,correo,telefonoFijo,telefonoCelular,direccion) "
-           + "VALUES('?',?,'?','?','?',?,?,'?')";
+   sql = "INSERT INTO persona(numeroIdentificacion,tipoIdentificacion,nombre,apellido,correo,telefonoFijo,telefonoCelular,direccion,rol) VALUES('" + personaVO.getNumeroIdentificacion() + "'," + personaVO.getTipoIdentificacion() + ",'" + personaVO.getNombre() + "','" + personaVO.getApellido() + "','" + personaVO.getCorreo() + "'," + personaVO.getTelefonoFijo() + "," + personaVO.getTelefonoCelular() + ",'" + personaVO.getDireccion() + "',1)";
    ps = con.prepareStatement(sql);
-   ps.setString(1, personaVO.getNumeroIdentificacion());
-   ps.setInt(2, personaVO.getTipoIdentificacion());
-   ps.setString(3, personaVO.getNombre());
-   ps.setString(4, personaVO.getApellido());
-   ps.setString(5, personaVO.getCorreo());
-   ps.setDouble(6, personaVO.getTelefonoFijo());
-   ps.setDouble(7, personaVO.getTelefonoCelular());
-   ps.setString(8, personaVO.getDireccion());
    ps.executeUpdate();
    return true;
   } catch (Exception e) {
@@ -82,21 +37,8 @@ public class personaDAO {
 
  public boolean registrarFuncionario(personaVO personaVO) throws Exception {
   try {
-   sql = "INSERT INTO persona(numeroIdentificacion,tipoIdentifcicacion,nombre,apellido,correo,telefonoFijo,telefonoCelular,direccion,rol,usuario,clave,oficina) "
-           + "VALUES('?',?,'?','?','?',?,?,'?',?,'?','?',?)";
+   sql = "INSERT INTO persona(numeroIdentificacion,tipoIdentificacion,nombre,apellido,correo,telefonoFijo,telefonoCelular,direccion,rol,usuario,clave,oficina) VALUES('" + personaVO.getNumeroIdentificacion() + "'," + personaVO.getTipoIdentificacion() + ",'" + personaVO.getNombre() + "','" + personaVO.getApellido() + "','" + personaVO.getCorreo() + "'," + personaVO.getTelefonoFijo() + "," + personaVO.getTelefonoCelular() + ",'" + personaVO.getDireccion() + "'," + personaVO.getRol() + ",'" + personaVO.getUsuario() + "','" + personaVO.getNumeroIdentificacion() + "'," + personaVO.getOficina() + ")";
    ps = con.prepareStatement(sql);
-   ps.setString(1, personaVO.getNumeroIdentificacion());
-   ps.setInt(2, personaVO.getTipoIdentificacion());
-   ps.setString(3, personaVO.getNombre());
-   ps.setString(4, personaVO.getApellido());
-   ps.setString(5, personaVO.getCorreo());
-   ps.setDouble(6, personaVO.getTelefonoFijo());
-   ps.setDouble(7, personaVO.getTelefonoCelular());
-   ps.setString(8, personaVO.getDireccion());
-   ps.setInt(9, personaVO.getRol());
-   ps.setString(10, personaVO.getUsuario());
-   ps.setString(11, personaVO.getClave());
-   ps.setInt(12, personaVO.getOficina());
    ps.executeUpdate();
    return true;
   } catch (Exception e) {
@@ -225,17 +167,26 @@ public class personaDAO {
   }
  }
 
- public personaVO listar1Persona(String id) throws Exception {
+ public List listar1Persona(String id) throws Exception {
   personaVO persona = new personaVO();
-  sql = "SELECT nombre,numeroIdentificacion FROM persona WHERE numeroIdentificacion='" + id + "'";
+  sql = "SELECT * FROM persona WHERE numeroIdentificacion='" + id + "'";
   try {
    ps = con.prepareStatement(sql);
    rs = ps.executeQuery();
    while (rs.next()) {
     persona.setNombre(rs.getString("nombre"));
+    persona.setApellido(rs.getString("apellido"));
     persona.setNumeroIdentificacion(rs.getString("numeroIdentificacion"));
+    persona.setCorreo(rs.getString("correo"));
+    persona.setDireccion(rs.getString("direccion"));
+    persona.setTelefonoFijo(rs.getDouble("telefonoFijo"));
+    persona.setTelefonoCelular(rs.getDouble("telefonoCelular"));
+    persona.setTipoIdentificacion(rs.getInt("tipoIdentificacion"));
+    persona.setRol(rs.getInt("rol"));
+    persona.setOficina(rs.getInt("oficina"));
+    lista.add(persona);
    }
-   return persona;
+   return lista;
   } catch (SQLException e) {
    throw new Exception("Error al listar a un persona " + e);
   } finally {

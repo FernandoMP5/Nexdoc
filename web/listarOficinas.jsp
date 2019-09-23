@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.personaVO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.usuarioVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.oficinaVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.dao.oficinaDAO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%>
@@ -20,20 +21,20 @@
  <body>
   <%
    HttpSession misession = (HttpSession) request.getSession();
-   personaVO persona = (personaVO) misession.getAttribute("personaVO");
-   if (persona.getRol() == 2) {
+   usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
+   if (usuario.getRol() == 2) {
   %>
   <h1 style="text-align: center;">Seleccione la oficina</h1><br>
-   <%} else if (persona.getRol() == 4) {%>
+   <%} else if (usuario.getRol() == 4) {%>
   <h1 style="text-align: center;">Oficinas
-   <input type="button" class="btn" value="Registrar" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
+   <input type="button" class="btn btn-warning" value="Registrar" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
    <%}%>
-  <table class="table table-hover table-striped">
-   <thead>
+  <table class="table table-hover">
+   <thead class="thead-dark">
     <tr>
      <th>Nombre</th>
      <th>Telefono-Extencion</th>      
-      <%if (persona.getRol() == 4) {%>
+      <%if (usuario.getRol() == 4) {%>
      <th>Acciones</th>
       <%}%>
     </tr>
@@ -51,9 +52,9 @@
     <tr class="seleccionar" value="<%=oficinaVO.getIdOficina()%>" style="cursor: pointer" onclick="seleccionarOficina(<%=oficinaVO.getIdOficina()%>)">
      <td><%=oficinaVO.getNombreOficina()%></td>
      <td><%=oficinaVO.getTelefonoOficina()%></td>
-     <%if (persona.getRol() == 4) {%>
-     <td><button type="button" class="btn" value="<%=oficinaVO.getIdOficina()%>" style="padding: 5px">Modificar</button>
-      <button type="submit" class="btn" value="<%=oficinaVO.getIdOficina()%>" style="padding: 5px">Inhabilitar</button></td>
+     <%if (usuario.getRol() == 4) {%>
+     <td><button type="button" class="btn btn-warning" value="<%=oficinaVO.getIdOficina()%>" style="padding: 5px">Modificar</button>
+      <button type="submit" class="btn btn-danger" value="<%=oficinaVO.getIdOficina()%>" style="padding: 5px">Inhabilitar</button></td>
       <%}%>
     </tr>
     <%}%>

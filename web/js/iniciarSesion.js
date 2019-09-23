@@ -16,8 +16,7 @@ var iniciarSesion = {
      required: true
     },
     txtclave: {
-     required: true,
-     minlength: 8
+     required: true
     }
    },
    messages: {
@@ -25,8 +24,7 @@ var iniciarSesion = {
      required: "Campo obligatorio"
     },
     txtclave: {
-     required: "Campo obligatorio",
-     minlength: "Por favor, digite mínimo 8 carácteres"
+     required: "Campo obligatorio"
     }
    },
    submitHandler: function () {

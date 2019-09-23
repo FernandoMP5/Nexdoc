@@ -10,13 +10,13 @@
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Nexdoc</title>
-  <link rel="stylesheet" href="css/login.css"/>
+  <link href="css/login.css" rel="stylesheet" type="text/css"/>
  </head>
  <body>
  <center>
   <div class="wrapper fadeInDown">
    <div id="formContent"><br/>
-    <img src="img/Encabezado.png" width="266px" height="120px">
+    <img src="img/Encabezado.png" alt=""  width="266px" height="120px"/>
     <form id="formIniciarSesion">
      <center>
       <input type="text" name="txtusuario" id="txtusuario" placeholder="Usuario" autocomplete="off">

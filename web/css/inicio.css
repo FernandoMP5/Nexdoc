@@ -9,18 +9,16 @@ body{
   flex-direction: column;
   width: 100%;
 }
-input[type=button],input[type=submit]{
+.btn-warning{
   background-color: rgb(260,180,20);
   border-color: rgb(260,180,20);
-}
-input[type=button]:hover,input[type=submit]:hover{
-  background-color: grey;
-  border-color: grey;
-  color: white;
 }
 .error{
   color:red;
   font-size: 10px;
+}
+.form-group{
+ width: 300px;
 }
 /*---------------------------------- Menu ----------------------------------*/
 .navegacion{

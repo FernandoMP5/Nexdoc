@@ -23,6 +23,14 @@ $(document).ready(function () {
   console.log("Cargando enviados");
   $("#contenido").load("listarEnviados.jsp");
  });
+  $('#registrarFuncionario').click(function () {
+  console.log("Cargando formulario registrar funcionarios");
+  $("#contenido").load("registrarFuncionario.jsp");
+ });
+  $('#registrarRemitente').click(function () {
+  console.log("Cargando formulario registrar remitente");
+  $("#contenido").load("registrarRemitente.jsp");
+ });
 });
 
 

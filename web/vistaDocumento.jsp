@@ -36,6 +36,21 @@
    <label><b>Fecha Radicacion</b></label><br>
    <label><%=documentoVO.getFechaRadicacion()%></label><br>
   </div>
+  <div>
+   <table class="table table-hover">
+    <thead class="thead-dark">
+     <tr>
+      <th>Fecha Respuesta</th>
+      <th>Respuesta escrita</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td></td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
   <div class="respuesta">
     <input type="button" value="Redactar respuesta" class="btn">
   </div>

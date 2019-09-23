@@ -9,6 +9,7 @@
 <%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.dao.personaDAO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.personaVO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.usuarioVO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,17 +22,17 @@
  <body>
   <%
    HttpSession misession = (HttpSession) request.getSession();
-   personaVO persona = (personaVO) misession.getAttribute("personaVO");
-   if (persona.getRol() == 2) {
+   usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
+   if (usuario.getRol() == 2) {
   %>
   <h1 style="text-align: center;">Seleccione el remitente
    <input type="button" class="btn" value="Registrar" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
-   <%} else if (persona.getRol() == 4) {%>
+   <%} else if (usuario.getRol() == 4) {%>
   <h1 style="text-align: center;">Remitentes
-   <input type="button" class="btn" value="Registrar" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
-  <%}%>
-  <table class="table table-hover table-striped">
-   <thead>
+   <input type="button" class="btn btn-warning" value="Registrar"  id="registrarRemitente" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
+   <%}%>
+  <table class="table table-hover">
+   <thead class="thead-dark">
     <tr>
      <th>Nombre</th>
      <th>Documento</th>
@@ -39,10 +40,10 @@
      <th>Direccion</th>
      <th>Telefon Celular</th>
       <%
-       if (persona.getRol() == 2) {
+       if (usuario.getRol() == 2) {
       %>
      <th>Actualizar</th>
-      <%} else if (persona.getRol() == 4) {%>
+      <%} else if (usuario.getRol() == 4) {%>
      <th>Acciones</th>
       <%}%>
     </tr>
@@ -64,10 +65,10 @@
      <td><%=personaVO.getDireccion()%></td>
      <td><%=personaVO.getTelefonoCelular()%></td>
      <%
-      if (persona.getRol() == 2) {
+      if (usuario.getRol() == 2) {
      %>
      <td><button type="button" class="btn btn-warning" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button></td>
-     <%} else if (persona.getRol() == 4) {%>
+     <%} else if (usuario.getRol() == 4) {%>
      <td><button type="button" class="btn btn-warning" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Modificar</button>
       <button type="submit" class="btn btn-danger" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Inhabilitar</button></td>
       <%}%>
@@ -76,6 +77,7 @@
    </tbody>
   </table>
   <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+  <script src="js/MyScript.js" type="text/javascript"></script>
   <script>
   </script>
  </body>

@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +54,7 @@ public class ControladorDocumento extends HttpServlet {
 
  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException, Exception {
+  response.setContentType("application/json");
   String path = request.getParameter("path");
   switch (path) {
    case "/seleccionarRemitente":
@@ -83,11 +83,10 @@ public class ControladorDocumento extends HttpServlet {
  public void seleccionarRemitente(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException, Exception {
   String id = request.getParameter("idRemitente");
-  String respuesta = "";
+  List lista = null;
   try {
-   personaVO = personaDAO.listar1Persona(id);
-//   gson = respuesta;
-   gson = json.toJson(personaVO.getNumeroIdentificacion());
+   lista = personaDAO.listar1Persona(id);
+   gson = json.toJson(lista);
   } catch (Exception ex) {
    Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }
@@ -107,9 +106,10 @@ public class ControladorDocumento extends HttpServlet {
  public void seleccionarDestinatario(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException, Exception {
   String id = request.getParameter("idDestinatario");
+  List lista = null;
   try {
-   personaVO = personaDAO.listar1Persona(id);
-   gson = json.toJson(personaVO);
+   lista = personaDAO.listar1Persona(id);
+   gson = json.toJson(lista);
   } catch (Exception ex) {
    Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }
@@ -121,7 +121,7 @@ public class ControladorDocumento extends HttpServlet {
   String vistaDoc = "vistaDocumento.jsp";
   int id = Integer.parseInt(request.getParameter("idDocumento"));
   request.setAttribute("id", request.getParameter("idDocumento"));
-            request.setAttribute("IdOficina", request.getParameter("idDocumento"));
+  request.setAttribute("IdOficina", request.getParameter("idDocumento"));
   acceso = vistaDoc;
   try {
 //   gson = json.toJson(id);

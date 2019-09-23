@@ -7,7 +7,7 @@
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.oficinaVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.tipoDocumentoVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.dao.personaDAO"%>
-<%@page import="co.edu.sena.Nexdoc.persistencia.vo.personaVO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.usuarioVO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%> 
 <%@page import="java.util.List"%>
@@ -26,7 +26,7 @@
  <body>
   <%
    HttpSession misession = (HttpSession) request.getSession();
-   personaVO usuario = (personaVO) misession.getAttribute("personaVO");
+   usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
   %>
   <div class="Login">
    <nav>
@@ -97,9 +97,9 @@
      data: {idRemitente: idRemitente, path: "/seleccionarRemitente"},
      type: 'post',
      datetype: 'json',
-     success: function (resultado1) {
-      console.log(resultado1);
-      $("input[name=txtRemitente]").val(resultado1);
+     success: function (resultado) {
+      alert(resultado.nombre);
+      $('input[name=txtRemitente]').val(resultado.nombre);
 //      $("input[name='txtRemitente']").val(resultado);
      }
     });

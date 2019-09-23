@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.personaVO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.usuarioVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.documentoVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.dao.documentoDAO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%>
@@ -20,7 +21,7 @@
  <body>
   <%
    HttpSession misession = (HttpSession) request.getSession();
-   personaVO personaVO = (personaVO) misession.getAttribute("personaVO");
+   usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
   %>
   <div id="recibidos">
    <form>
@@ -39,7 +40,7 @@
       <%
        Conexion cn = new Conexion();
        documentoDAO documentoDAO = new documentoDAO(cn.conectar());
-       List<documentoVO> listarRecibidos = documentoDAO.recibidos("1000225552");
+       List<documentoVO> listarRecibidos = documentoDAO.recibidos("'" + usuario.getNumeroIdentificacion() + "'");
        Iterator<documentoVO> iteraRecibidos = listarRecibidos.iterator();
        documentoVO documentoVO = null;
        int i = 0;
@@ -67,7 +68,7 @@
     </table>
    </form>
   </div>
- <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
-     <script src="js/MyScript.js" type="text/javascript"></script>
+  <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+  <script src="js/MyScript.js" type="text/javascript"></script>
  </body>
 </html>

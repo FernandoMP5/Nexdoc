@@ -167,7 +167,7 @@ public class personaDAO {
   }
  }
 
- public List listar1Persona(String id) throws Exception {
+ public personaVO listar1Persona(String id) throws Exception {
   personaVO persona = new personaVO();
   sql = "SELECT * FROM persona WHERE numeroIdentificacion='" + id + "'";
   try {
@@ -184,9 +184,8 @@ public class personaDAO {
     persona.setTipoIdentificacion(rs.getInt("tipoIdentificacion"));
     persona.setRol(rs.getInt("rol"));
     persona.setOficina(rs.getInt("oficina"));
-    lista.add(persona);
    }
-   return lista;
+   return persona;
   } catch (SQLException e) {
    throw new Exception("Error al listar a un persona " + e);
   } finally {

@@ -4,6 +4,10 @@
     Author     : Familia Moreno
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.historialVO"%>
+<%@page import="java.util.List"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.dao.historialDAO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.documentoVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.dao.documentoDAO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%>
@@ -19,8 +23,8 @@
   <%
    Conexion cn = new Conexion();
    documentoDAO documentoDAO = new documentoDAO(cn.conectar());
-   int idDocumento = Integer.parseInt((String)request.getAttribute("IdOficina"));
-   documentoVO documentoVO = (documentoVO) documentoDAO.listarDocumento(idDocumento); 
+   int idDocumento = Integer.parseInt((String) request.getAttribute("IdOficina"));
+   documentoVO documentoVO = (documentoVO) documentoDAO.listarDocumento(idDocumento);
   %>
   <div id="documento">
    <object data="pdf?idDocumento=<%=documentoVO.getIdDocumento()%>" type="application/pdf"></object>
@@ -42,17 +46,33 @@
      <tr>
       <th>Fecha Respuesta</th>
       <th>Respuesta escrita</th>
+      <th>PDF</th>
      </tr>
     </thead>
     <tbody>
-     <tr>
-      <td></td>
+    <%
+     historialDAO historialDAO = new historialDAO(cn.conectar());
+     List<historialVO> listaHistorial = historialDAO.listarHistorial(documentoVO.getIdDocumento());
+     Iterator<historialVO> iteraHistorial = listaHistorial.iterator();
+     historialVO historialVO = null;
+     while (iteraHistorial.hasNext()) {
+      historialVO = iteraHistorial.next();
+    %>
+     <tr>     
+      <td><%=historialVO.getFechaHistoria()%></td> 
+      <td><%=historialVO.getRespuestaComen()%></td> 
+      <%if (historialVO.getRespuestaPDF() == null) {%>
+      <td>Sin PDF</td>
+      <%} else {%>
+      <td><a>Ver PDF</a></td>
+      <%}%>
      </tr>
+     <%}%> 
     </tbody>
    </table>
   </div>
   <div class="respuesta">
-    <input type="button" value="Redactar respuesta" class="btn">
+   <input type="button" value="Redactar respuesta" class="btn btn-warning">
   </div>
  </body>
 </html>

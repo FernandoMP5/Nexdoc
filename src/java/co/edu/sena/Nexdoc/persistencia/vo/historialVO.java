@@ -54,7 +54,7 @@ public class historialVO {
         return respuestaPDF;
     }
 
-    public void setRespuestaPDFmostrar(InputStream respuestaPDF) {
+    public void setRespuestaPDF(InputStream respuestaPDF) {
         this.respuestaPDF = respuestaPDF;
     }
 

@@ -53,34 +53,34 @@ var radicarDocumento = {
    },
    submitHandler: function () {
     console.log('formulario validado'),
-            radicarDocumento.radicarDocumento();
+            $(function () {
+             $("#formRadicarDocumento").on("submit", function (e) {
+              e.preventDefault();
+              var f = $(this);
+              var formData = new FormData(document.getElementById("formRadicarDocumento"));
+//     formData.append("/radicarDocumento");
+              $.ajax({
+               url: 'ControladorDocumento',
+               type: 'post',
+               datetype: 'json',
+               data: formData,
+               cache: false,
+               contentType: false,
+               processData: false,
+               success: function (resultado) {
+                alert(resultado);
+               },
+               error: function (error) {
+                console.warn(error);
+               }
+              });
+             });
+            });
    }
   });
   $('#formRadicarDocumento').submit();
  }
 };
-$(function () {
- $("#formRadicarDocumento").on("submit", function (e) {
-  e.preventDefault();
-  var f = $(this);
-  var formData = getFormData(document.getElementById("formRadicarDocumento"));
-  $.ajax({
-   url: 'ControladorDocumento',
-   type: 'post',
-   datetype: 'json',
-   data: {formData, path: "/radicarDocumento"},
-   cache: false,
-   contentType: false,
-   processData: false,
-   success: function (resultado) {
-    alert(resultado);
-   },
-   error: function (error) {
-    console.warn(error);
-   }
-  });
- });
-});
 radicarDocumento.init();
 
 

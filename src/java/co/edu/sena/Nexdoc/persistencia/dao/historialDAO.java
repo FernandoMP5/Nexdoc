@@ -26,11 +26,12 @@ public class historialDAO {
     sql = "INSERT INTO historial(`idHistoria`,`idDocumento`,`fechaHistoria`,`respuestaPDF`,`respuestaComen`,`idDestinatario`) VALUES"
             + "(" + historialVO.getIdHistotia() + ","
             + "" + historialVO.getIdDocumento() + ","
-            + "NOW()," + historialVO.getRespuestaPDF() + ","
+            + "NOW(),?,"
             + "'" + historialVO.getRespuestaComen() + "',"
             + "" + historialVO.getIdDestinatario() + ")";
     try {
       ps = con.prepareStatement(sql);
+      ps.setBlob(1, historialVO.getRespuestaPDF());
       ps.executeUpdate();
       return false;
     } catch (SQLException e) {

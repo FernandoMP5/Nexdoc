@@ -19,7 +19,7 @@ DELETE FROM documento
 WHERE idDocumento=1
 
 INSERT INTO historial(`idHistoria`,`idDocumento`,`fechaHistoria`,`respuestaComen`,`idDestinatario`) 
-VALUES (1,1,NOW(),'COMENTARIO PRUBEA PONGA CUALQUIER VAINA',1000225552)
+VALUES (2,8,NOW(),'COMENTARIO PRUBEA PONGA CUALQUIER VAINA',1111)
 
 INSERT INTO oficina VALUES(2,"Ventas",3215)
 

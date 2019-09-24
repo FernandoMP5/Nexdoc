@@ -1,10 +1,17 @@
 
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.tipoDocumentoVO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.dao.tipoDocumentoDAO"%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%>
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
 <style type="text/css">
  .modal{
-  top: 300px;
+  top: 430px;
   right: 100px;
   bottom: -100px;
-  left: 350px;
+  left: 39%;
   z-index: 10040;
   overflow: auto;
   overflow-y: auto;
@@ -14,8 +21,11 @@
   height: 300px;
  }
  .modal-header{
-  background: #000;
   color:#fff;
+  cursor: pointer;
+ }
+ .modal-header{
+  background: #000;
  }
  .modal-body{
   padding: 0px;
@@ -34,80 +44,64 @@
 <div class="modal fade" data-backdrop="static" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
  <div class="modal-dialog" role="document">
   <div class="modal-content">
-   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Nuevo Documento</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     <span aria-hidden="true">&times;</span>
-    </button>
-   </div>
-   <div class="modal-body">
-    <input type="text" placeholder="Remitente" readonly="readonly">
-    <input type="text" placeholder="Oficina" readonly="readonly">
-    <input type="text" placeholder="Destinatario" readonly="readonly">
-    <select>
+   <form id="formRadicarDocumento" enctype="multipart/form-data" method="post">
+    <div class="modal-header prueba">
+     <h5 class="modal-title" id="titulo">Nuevo Documento</h5>
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true" style="color: white">&times;</span>
+     </button>
+    </div>
+    <div class="modal-body">
+     <input type="text" placeholder="Remitente" readonly="readonly" name="txtRemitente" id="listarRemitentes">
+     <input type="hidden" readonly="readonly" id="idRemitente" name="idRemitente"> 
+     <input type="text" placeholder="Oficina" readonly="readonly" name="txtOficina" id="listarOficinas">
+     <input type="hidden"readonly="readonly" id="idOficina" name="idOficina"> 
+     <input type="hidden"readonly="readonly" id="path" name="path" value="/radicarDocumento"> 
+     <input type="text" placeholder="Destinatario" readonly="readonly" name="txtDestinatario" id="listarFuncionarios">
+     <input type="hidden"readonly="readonly" id="idDestinatario" name="idDestinatario">
+    </div>
+    <select name="cboTipoDocumento" id="cboTipoDocumento">
      <option disabled selected>Tipo Documento</option>
-     <option>Hoja de Vida</option>
-     <option>Hoja de Vida</option>
-     <option>Hoja de Vida</option>
+     <%
+      Conexion cn = new Conexion();
+      tipoDocumentoDAO tipoDocumentoDAO = new tipoDocumentoDAO(cn.conectar());
+      List<tipoDocumentoVO> listatipoDocumento = tipoDocumentoDAO.listartipoDoc();
+      Iterator<tipoDocumentoVO> iteratipoDocumento = listatipoDocumento.iterator();
+      tipoDocumentoVO tipoDocumentoVO = null;
+      while (iteratipoDocumento.hasNext()) {
+       tipoDocumentoVO = iteratipoDocumento.next();
+     %>
+     <option value="<%=tipoDocumentoVO.getIdtipoDocumento()%>"><%=tipoDocumentoVO.getDescripcion()%></option>  
+     <%}%>
     </select>
-    <select>
+    <select name="cboPrioridad" id="cboPrioridad">
      <option disabled selected>Prioridad</option>
-     <option>Maxima</option>
-     <option>Madia</option>
-     <option>Baja</option>
+     <option value="1">Maxima</option>
+     <option value="2">Media</option>
+     <option value="3">Baja</option>
     </select>
-    <input type="file" placeholder="Examinar">
-   </div>
-   <div class="modal-footer">
-    <button type="button" class="btn btn-primary">Enviar</button>
-   </div>
+    <input type="file" style="width: 100%;height: 100%;text-align: center;padding: 10px" name="documento" id="documento">
+    <div class="modal-footer">
+     <input type="submit" class="btn btn-warning" value="Enviar" name="Enviar">
+    </div>
+   </form>
   </div>
  </div>
 </div>
-
-
-
-
-<li id="formulario" class="formulario">
- <div style="padding: 20px; height: 450px">
-  <h3>Radicar Documento</h3>
-  <div class="form-group">
-   <label>Remitente</label>
-   <input type="text" class="form-control" name="txtRemitente"  id="listarRemitentes" readonly="readonly" value="">
-   <input type="hidden" name="txtidRemitente">
-   <input type="hidden" name="txtrolRemitente">
-   <input type="hidden" name="txtoficinaRemitente">
-   <input type="hidden" name="txttipoIdentificacionRemitente">
-  </div>
-  <div class="form-group">
-   <label>Oficina</label>
-   <input type="text" class="form-control" name="txtOficina" id="listarOficinas" readonly="readonly" value="">
-  </div>
-  <div class="form-group">
-   <label>Destinatario</label>
-   <input type="text" class="form-control" name="txtDextinatario" id="listarFuncionarios" readonly="readonly" value="">
-  </div>
-  <div class="form-group">
-   <label>Tipo Documento</label></br>
-   <select class="form-control">
-    <option>Hoja de vida</option>
-    <option>Hoja de vida</option>
-    <option>Hoja de vida</option>
-   </select>
-  </div>
-  <div class="form-group">
-   <label>Prioridad</label></br>
-   <input type="radio" name="rbPrioridad">Maxima </br>
-   <input type="radio" name="rbPrioridad">Media </br>
-   <input type="radio" name="rbPrioridad">Baja </br>
-  </div>
-  <div id="divFile" class="btn btn-warning">
-   <p id="texto">Añadir documento</p>
-   <input type="file" id="documento">
-  </div>
-  <input type="button" name="Radicar" id="radicar" class="btn btn-info" value="Radicar">
- </div>
-</li>
-</ul>
-</nav>
-</div>
+<script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/bootstrap.js" type="text/javascript"></script>
+<script>
+ $(document).ready(function () {
+  $("#exampleModal").modal('show');
+//  $("#titulo").html('Nueva Respuesta');
+  $(".modal-body").html("<textarea id='respuestaComen'></textarea>");
+  $("#respuestaComen").css({'width': '299px'});
+  $("#respuestaComen").css({'height': '100px'});
+  $("#respuestaComen").css({'border': 'none'});
+  $("#respuestaComen").css({'background': '#fff'});
+  $("#cboPrioridad").css({'display':'none'});
+  $("#cboTipoDocumento").css({'display':'none'});
+  $("#modal-footer").css({'height':'70px'});
+ })
+</script>

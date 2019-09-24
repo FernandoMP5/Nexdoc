@@ -158,17 +158,17 @@ public class ControladorDocumento extends HttpServlet {
     int idtipodocumento = Integer.parseInt(request.getParameter("cboTipoDocumento"));
     String idRecepcionista = usuario.getNumeroIdentificacion();
 
-    personaVO.setNumeroIdentificacion(remitente);
-    documentoVO.setIdRemitente(personaVO);
+//    personaVO.setNumeroIdentificacion(remitente);
+//    documentoVO.setIdRemitente(personaVO);
 
     tipoDocumentoVO.setIdtipoDocumento(idtipodocumento);
     documentoVO.setIdtipoDocumento(tipoDocumentoVO);
 
-    personaVO.setNumeroIdentificacion(destinatario);
-    documentoVO.setIdDestinatario(personaVO);
-
-    personaVO.setNumeroIdentificacion(idRecepcionista);
-    documentoVO.setIdRecepcionista(personaVO);
+//    personaVO.setNumeroIdentificacion(destinatario);
+//    documentoVO.setIdDestinatario(personaVO);
+//
+//    personaVO.setNumeroIdentificacion(idRecepcionista);
+//    documentoVO.setIdRecepcionista(personaVO);
 
     oficinaVO.setIdOficina(idoficina);
     documentoVO.setIdOficina(oficinaVO);
@@ -179,7 +179,7 @@ public class ControladorDocumento extends HttpServlet {
       documentoVO.setDocumentoPDF(inputStream);
     }
     try {
-      documentoDAO.radicarDocumento(documentoVO);
+      documentoDAO.radicarDocumento(documentoVO,destinatario,remitente,idRecepcionista);
     } catch (Exception ex) {
       Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
     }

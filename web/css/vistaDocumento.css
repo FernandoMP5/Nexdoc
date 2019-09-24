@@ -2,7 +2,7 @@
  float: left;
 }
 #documento > object{
- width: 70%; 
+ width: 60%; 
  height: 86vh;
  margin-top: -10px;
  margin-right:10px;
@@ -13,5 +13,11 @@
 }
 .respuesta{
  float: right; 
+ width: 10%;
  margin-right: 20px;
+ margin-top:450px;
+}
+.table{
+ width: 39%;
+ margin-top:-450px;
 }

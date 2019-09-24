@@ -219,9 +219,8 @@
 
 <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="js/jquery.validate.js" type="text/javascript"></script>
-<!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>-->
-<!--<script src="js/radicarDocumento.js" type="text/javascript"></script>-->
-<script>
+<script src="js/radicarDocumento.js" type="text/javascript"></script>
+<!--<script>
    $(function () {
     $("#formRadicarDocumento").on("submit", function (e) {
      e.preventDefault();
@@ -245,5 +244,5 @@
      });
     });
    });
-</script>
+</script>-->
 

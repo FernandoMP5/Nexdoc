@@ -7,6 +7,7 @@ import co.edu.sena.Nexdoc.persistencia.vo.personaVO;
 import co.edu.sena.Nexdoc.persistencia.vo.oficinaVO;
 import co.edu.sena.Nexdoc.persistencia.vo.prioridadVO;
 import co.edu.sena.Nexdoc.persistencia.vo.tipoDocumentoVO;
+import co.edu.sena.Nexdoc.persistencia.vo.usuarioVO;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 public class documentoDAO {
 
@@ -23,6 +25,7 @@ public class documentoDAO {
  ResultSet rs;
  private String sql = "";
  private final ArrayList<documentoVO> lista = new ArrayList<>();
+
 
  public documentoDAO(Connection con) {
   this.con = con;
@@ -64,20 +67,21 @@ public class documentoDAO {
   }
  }//fin recibidos
 
- public boolean radicarDocumento(documentoVO documentoVO) throws Exception {
-  sql = "INSERT INTO documento(visualizaciones) "
-          + "VALUES(0)";//documentoPDF
-//          + "0,"//visualizaciones
-//          + "'" + documentoVO.getIdRemitente().getNumeroIdentificacion() + "',"//idRemitente
-//          + "'" + documentoVO.getIdDestinatario().getNumeroIdentificacion() + "',"//idDestinatario
-//          + "'" + documentoVO.getIdRecepcionista().getNumeroIdentificacion() + "',"//idRecepcionista
-//          + "1,"//idEstado
-//          + "" + documentoVO.getIdPrioridad().getIdPrioridad() + ","//idPrioridad
-//          + "NOW(),"//fechaRadicacion
-//          + "" + documentoVO.getIdOficina().getIdOficina() + ","//idOficina
-//          + "" + documentoVO.getIdtipoDocumento().getIdtipoDocumento() + ")";//idtipoDocumento
+ public boolean radicarDocumento(documentoVO documentoVO,String idDestinatario,String idRemitente,String idRecepcionista) throws Exception {
+  sql = "INSERT INTO documento(documentoPDF,visualizaciones,idRemitente,idDestinatario,idRecepcionista,idEstado,idPrioridad,fechaRadicacion,idOficina,idtipoDocumento) "
+          + "VALUES(?,"//documentoPDF
+          + "0,"//visualizaciones
+          + "'" + idRemitente + "',"//idRemitente
+          + "'" + idDestinatario + "',"//idDestinatario
+          + "'" + idRecepcionista + "',"//idRecepcionista
+          + "1,"//idEstado
+          + "" + documentoVO.getIdPrioridad().getIdPrioridad() + ","//idPrioridad
+          + "NOW(),"//fechaRadicacion
+          + "" + documentoVO.getIdOficina().getIdOficina() + ","//idOficina
+          + "" + documentoVO.getIdtipoDocumento().getIdtipoDocumento() + ")";//idtipoDocumento
   try {
    ps = con.prepareStatement(sql);
+   ps.setBlob(1, documentoVO.getDocumentoPDF());
 //      ps.setString(2, documentoVO.getIdRemitente());
 //      ps.setInt(3, documentoVO.getIdPrioridad());
 //      ps.setInt(4, documentoVO.getIdOficina());

@@ -1,6 +1,7 @@
 package co.edu.sena.Nexdoc.persistencia.dao;
 
 import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
+import co.edu.sena.Nexdoc.persistencia.vo.oficinaVO;
 import co.edu.sena.Nexdoc.persistencia.vo.personaVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,33 +71,32 @@ public class personaDAO {
   }
  }
 
- public boolean actualizarFuncionario(String numeroIdentificacion, personaVO personaVO) throws Exception {
-  try {
-   sql = "UPDATE persona SET numeroIdentificacion = '?',tipoIdentifcicacion = ?,nombre = '?',apellido = '?',correo = '?',"
-           + "telefonoFijo = ?,telefonoCelular = ?,direccion = '?',rol = ?,usuario = '?',clave = '?',"
-           + "oficina = ? WHERE numeroIdentificacion=" + numeroIdentificacion;
-   ps = con.prepareStatement(sql);
-   ps.setString(1, personaVO.getNumeroIdentificacion());
-   ps.setInt(2, personaVO.getTipoIdentificacion());
-   ps.setString(3, personaVO.getNombre());
-   ps.setString(4, personaVO.getApellido());
-   ps.setString(5, personaVO.getCorreo());
-   ps.setDouble(6, personaVO.getTelefonoFijo());
-   ps.setDouble(7, personaVO.getTelefonoCelular());
-   ps.setString(8, personaVO.getDireccion());
-   ps.setInt(9, personaVO.getRol());
-   ps.setString(10, personaVO.getUsuario());
-   ps.setString(11, personaVO.getClave());
-   ps.setInt(12, personaVO.getOficina());
-   ps.executeUpdate();
-   return true;
-  } catch (Exception e) {
-   throw new Exception("Error al actualizar al Funcionario" + e);
-  } finally {
-   Conexion.cerrar(ps, rs);
-  }
- }
-
+// public boolean actualizarFuncionario(String numeroIdentificacion, personaVO personaVO) throws Exception {
+//  try {
+//   sql = "UPDATE persona SET numeroIdentificacion = '?',tipoIdentifcicacion = ?,nombre = '?',apellido = '?',correo = '?',"
+//           + "telefonoFijo = ?,telefonoCelular = ?,direccion = '?',rol = ?,usuario = '?',clave = '?',"
+//           + "oficina = ? WHERE numeroIdentificacion=" + numeroIdentificacion;
+//   ps = con.prepareStatement(sql);
+//   ps.setString(1, personaVO.getNumeroIdentificacion());
+//   ps.setInt(2, personaVO.getTipoIdentificacion());
+//   ps.setString(3, personaVO.getNombre());
+//   ps.setString(4, personaVO.getApellido());
+//   ps.setString(5, personaVO.getCorreo());
+//   ps.setDouble(6, personaVO.getTelefonoFijo());
+//   ps.setDouble(7, personaVO.getTelefonoCelular());
+//   ps.setString(8, personaVO.getDireccion());
+//   ps.setInt(9, personaVO.getRol());
+//   ps.setString(10, personaVO.getUsuario());
+//   ps.setString(11, personaVO.getClave());
+//   ps.setInt(12, personaVO.getOficina());
+//   ps.executeUpdate();
+//   return true;
+//  } catch (Exception e) {
+//   throw new Exception("Error al actualizar al Funcionario" + e);
+//  } finally {
+//   Conexion.cerrar(ps, rs);
+//  }
+// }
  public List listarRemitentes() throws Exception {
   sql = "SELECT * FROM persona WHERE rol=1";
   try {
@@ -125,18 +125,21 @@ public class personaDAO {
  public List listarFuncionarios() throws Exception {
   sql = "SELECT CONCAT(P.nombre,' ',P.apellido)nombre,P.numeroIdentificacion,P.direccion,P.telefonoFijo,P.telefonoCelular,P.correo,R.descripcion,O.nombreOficina FROM persona P "
           + "INNER JOIN rol R ON P.rol=R.idRol INNER JOIN oficina O ON O.idOficina=P.oficina "
-          + "WHERE P.rol > 1";
+          + "WHERE P.rol > 2";
   try {
    ps = con.prepareStatement(sql);
    rs = ps.executeQuery();
    while (rs.next()) {
     personaVO personaVO = new personaVO();
+    oficinaVO oficinaVO = new oficinaVO();
     personaVO.setNombre(rs.getString("nombre"));
     personaVO.setNumeroIdentificacion(rs.getString("numeroIdentificacion"));
     personaVO.setCorreo(rs.getString("correo"));
     personaVO.setDireccion(rs.getString("direccion"));
     personaVO.setTelefonoFijo(rs.getDouble("telefonoFijo"));
     personaVO.setTelefonoCelular(rs.getDouble("telefonoCelular"));
+    oficinaVO.setNombreOficina(rs.getString("O.nombreOficina"));
+    personaVO.setOficina(oficinaVO);
     lista.add(personaVO);
    }
    return lista;
@@ -169,6 +172,7 @@ public class personaDAO {
 
  public personaVO listar1Persona(String id) throws Exception {
   personaVO persona = new personaVO();
+  oficinaVO oficinaVO = new oficinaVO();
   sql = "SELECT * FROM persona WHERE numeroIdentificacion='" + id + "'";
   try {
    ps = con.prepareStatement(sql);
@@ -183,7 +187,8 @@ public class personaDAO {
     persona.setTelefonoCelular(rs.getDouble("telefonoCelular"));
     persona.setTipoIdentificacion(rs.getInt("tipoIdentificacion"));
     persona.setRol(rs.getInt("rol"));
-    persona.setOficina(rs.getInt("oficina"));
+    oficinaVO.setNombreOficina(rs.getString("O.nombreOficina"));
+    persona.setOficina(oficinaVO);
    }
    return persona;
   } catch (SQLException e) {

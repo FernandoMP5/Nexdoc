@@ -34,7 +34,7 @@
      <th>Nombre</th>
      <th>Documento</th>
      <th>Correo</th>
-     <th>Direccion</th>
+     <th>Oficina</th>
      <th>Telefon Celular</th>
       <%
        if (usuario.getRol() == 4) {%>
@@ -58,7 +58,7 @@
      <td><%=personaVO.getNombre()%></td>
      <td><%=personaVO.getNumeroIdentificacion()%></td>
      <td><%=personaVO.getCorreo()%></td>
-     <td><%=personaVO.getDireccion()%></td>
+     <td><%=personaVO.getOficina().getNombreOficina()%></td>
      <td><%=personaVO.getTelefonoCelular()%></td>
      <%}
       if (usuario.getRol() == 4) {%>
@@ -66,7 +66,7 @@
      <td><%=personaVO.getNombre()%></td>
      <td><%=personaVO.getNumeroIdentificacion()%></td>
      <td><%=personaVO.getCorreo()%></td>
-     <td><%=personaVO.getDireccion()%></td>
+     <td><%=personaVO.getOficina().getNombreOficina()%></td>
      <td><%=personaVO.getTelefonoCelular()%></td>
      <td><button type="submit" class="btn btn-warning" style="padding: 5px" onclick="listarFuncionario(<%=personaVO.getNumeroIdentificacion()%>)">Modificar</button>
       <button type="submit" class="btn btn-danger" value="<%=personaVO.getNumeroIdentificacion()%>" style="padding: 5px">Inhabilitar</button></td>

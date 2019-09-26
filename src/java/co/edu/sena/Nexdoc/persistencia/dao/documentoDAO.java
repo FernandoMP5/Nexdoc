@@ -127,7 +127,7 @@ public class documentoDAO {
  }
 
  public List enviados(String idRecepcionista) throws Exception {
-  sql = "SELECT CONCAT(p.nombre,' ',p.apellido)nombre,d.idDocumento,d.visualizaciones,d.fechaRadicacion,r.descripcion,o.nombreOficina,t.descripcion FROM documento d INNER JOIN persona p ON d.`idRemitente`=p.`numeroIdentificacion` INNER JOIN oficina o ON d.`idOficina`=o.idOficina INNER JOIN prioridad r ON d.idPrioridad=r.idPrioridad INNER JOIN tipoDocumento t ON d.`idtipoDocumento`=t.`idtipoDocumento` WHERE d.idRecepcionista=" + idRecepcionista;
+  sql = "SELECT CONCAT(p.nombre,' ',p.apellido)nombre,d.idDocumento,d.visualizaciones,d.fechaRadicacion,r.descripcion,o.nombreOficina,t.descripcion FROM documento d INNER JOIN persona p ON d.`idDestinatario`=p.`numeroIdentificacion` INNER JOIN oficina o ON d.`idOficina`=o.idOficina INNER JOIN prioridad r ON d.idPrioridad=r.idPrioridad INNER JOIN tipoDocumento t ON d.`idtipoDocumento`=t.`idtipoDocumento` WHERE d.idRecepcionista=" + idRecepcionista;
   try {
    ps = con.prepareStatement(sql);
    rs = ps.executeQuery();

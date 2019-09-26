@@ -1,8 +1,4 @@
 $(document).ready(function () {
- $('#radicar').click(function () {
-  console.log("Cargando formulario radicar");
-  $("#contenido").load("radicarDocumento.jsp");
- });
  $('#listarFuncionarios').click(function () {
   console.log("Cargando funcionarios");
   $("#contenido").load("listarFuncionarios.jsp");
@@ -23,11 +19,11 @@ $(document).ready(function () {
   console.log("Cargando enviados");
   $("#contenido").load("listarEnviados.jsp");
  });
-  $('#registrarFuncionario').click(function () {
+ $('#registrarFuncionario').click(function () {
   console.log("Cargando formulario registrar funcionarios");
   $("#contenido").load("registrarFuncionario.jsp");
  });
-  $('#registrarRemitente').click(function () {
+ $('#registrarRemitente').click(function () {
   console.log("Cargando formulario registrar remitente");
   $("#contenido").load("registrarRemitente.jsp");
  });

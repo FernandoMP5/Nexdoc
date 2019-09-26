@@ -26,7 +26,7 @@
    if (usuario.getRol() == 2) {
   %>
   <h1 style="text-align: center;">Seleccione el remitente
-   <input type="button" class="btn" value="Registrar" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
+   <input type="button" class="btn btn-warning" value="Registrar"  id="registrarRemitente" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>
    <%} else if (usuario.getRol() == 4) {%>
   <h1 style="text-align: center;">Remitentes
    <input type="button" class="btn btn-warning" value="Registrar"  id="registrarRemitente" style="float:right;margin: 5px;margin-right: 35px;"></h1><br>

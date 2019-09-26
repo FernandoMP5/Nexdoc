@@ -4,8 +4,9 @@
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.tipoDocumentoVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.dao.tipoDocumentoDAO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.conexion.Conexion"%>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<!--<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<p>Prueba</p>
 <style type="text/css">
  .modal{
   top: 430px;
@@ -45,11 +46,13 @@
  <div class="modal-dialog" role="document">
   <div class="modal-content">
    <form id="formRadicarDocumento" enctype="multipart/form-data" method="post">
-    <div class="modal-header prueba">
-     <h5 class="modal-title" id="titulo">Nuevo Documento</h5>
-     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true" style="color: white">&times;</span>
-     </button>
+    <div class="prueba" id="prueba">
+     <div class="modal-header">
+      <h5 class="modal-title" id="titulo">Nuevo Documento</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+       <span aria-hidden="true" style="color: white">&times;</span>
+      </button>
+     </div>
     </div>
     <div class="modal-body">
      <input type="text" placeholder="Remitente" readonly="readonly" name="txtRemitente" id="listarRemitentes">
@@ -91,17 +94,19 @@
 <script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="../js/jquery.js" type="text/javascript"></script>
 <script src="../js/bootstrap.js" type="text/javascript"></script>
+<script src="../js/menu.js" type="text/javascript"></script>
+<script src="../js/radicarRespuesta.js" type="text/javascript"></script>
 <script>
  $(document).ready(function () {
-  $("#exampleModal").modal('show');
-//  $("#titulo").html('Nueva Respuesta');
-  $(".modal-body").html("<textarea id='respuestaComen'></textarea>");
-  $("#respuestaComen").css({'width': '299px'});
-  $("#respuestaComen").css({'height': '100px'});
-  $("#respuestaComen").css({'border': 'none'});
-  $("#respuestaComen").css({'background': '#fff'});
-  $("#cboPrioridad").css({'display':'none'});
-  $("#cboTipoDocumento").css({'display':'none'});
-  $("#modal-footer").css({'height':'70px'});
+   $("#exampleModal").modal('show');
+   $("#titulo").html('Nueva Respuesta');
+   $(".modal-body").html("<textarea id='respuestaComen'></textarea>");
+   $("#respuestaComen").css({'width': '299px'});
+   $("#respuestaComen").css({'height': '170px'});
+   $("#respuestaComen").css({'border': 'none'});
+   $("#respuestaComen").css({'background': '#fff'});
+   $("#cboPrioridad").css({'display': 'none'});
+   $("#cboTipoDocumento").css({'display': 'none'});
+   $("#modal-footer").css({'height': '70px'});
  })
 </script>

@@ -13,7 +13,7 @@ public class historialVO {
     private InputStream respuestaPDF;
     private byte[] respuestaPDFmostrar;
     private String respuestaComen;
-    private int idDestinatario;
+    private personaVO idDestinatario;
 
     public historialVO() {
     }
@@ -66,11 +66,11 @@ public class historialVO {
         this.respuestaComen = respuestaComen;
     }
 
-    public int getIdDestinatario() {
+    public personaVO getIdDestinatario() {
         return idDestinatario;
     }
 
-    public void setIdDestinatario(int idDestinatario) {
+    public void setIdDestinatario(personaVO idDestinatario) {
         this.idDestinatario = idDestinatario;
     }
     

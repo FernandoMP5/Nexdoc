@@ -41,11 +41,10 @@ var iniciarSesion = {
    data: {usuario: $("#txtusuario").val(), clave: $("#txtclave").val(), path: "/iniciarSesion"},
    datetype: 'json',
    success: function (resultado) {
-    if (resultado == 2 || resultado == 3 || resultado == 4) {
+    if (resultado === 2 || resultado === 3 || resultado === 4) {
      window.location.href = "inicio.jsp";
-    } else {
+    } else{
      alert("Error");
-     window.location.href = "index.jsp";
     }
    },
    error: function (error) {

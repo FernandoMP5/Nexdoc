@@ -55,3 +55,5 @@ SELECT * FROM rol WHERE idRol != 1
 DELETE FROM persona WHERE numeroIdentificacion!=1000225552 AND numeroIdentificacion!=1002313750
 
 INSERT INTO documento(`idRemitente`,`idDestinatario`,`idRecepcionista`) VALUES('159','159','159')
+
+DELETE FROM documento

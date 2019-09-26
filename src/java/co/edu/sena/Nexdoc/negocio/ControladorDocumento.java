@@ -2,9 +2,11 @@ package co.edu.sena.Nexdoc.negocio;
 
 import co.edu.sena.Nexdoc.persistencia.conexion.Conexion;
 import co.edu.sena.Nexdoc.persistencia.dao.documentoDAO;
+import co.edu.sena.Nexdoc.persistencia.dao.historialDAO;
 import co.edu.sena.Nexdoc.persistencia.dao.oficinaDAO;
 import co.edu.sena.Nexdoc.persistencia.dao.personaDAO;
 import co.edu.sena.Nexdoc.persistencia.vo.documentoVO;
+import co.edu.sena.Nexdoc.persistencia.vo.historialVO;
 import co.edu.sena.Nexdoc.persistencia.vo.personaVO;
 import co.edu.sena.Nexdoc.persistencia.vo.oficinaVO;
 import co.edu.sena.Nexdoc.persistencia.vo.prioridadVO;
@@ -33,181 +35,209 @@ import javax.servlet.http.Part;
 
 public class ControladorDocumento extends HttpServlet {
 
-  Connection con;
-  Conexion cn = new Conexion();
-  documentoVO documentoVO = new documentoVO();
-  tipoDocumentoVO tipoDocumentoVO = new tipoDocumentoVO();
-  oficinaVO oficinaVO = new oficinaVO();
-  personaVO personaVO = new personaVO();
-  prioridadVO prioridadVO = new prioridadVO();
-  documentoDAO documentoDAO = new documentoDAO(con);
-  personaDAO personaDAO = new personaDAO(con);
-  oficinaDAO oficinaDAO = new oficinaDAO(con);
-  Gson json = new Gson();
-  String gson;
-  PrintWriter out;
+ Connection con;
+ Conexion cn = new Conexion();
+ documentoVO documentoVO = new documentoVO();
+ tipoDocumentoVO tipoDocumentoVO = new tipoDocumentoVO();
+ oficinaVO oficinaVO = new oficinaVO();
+ personaVO personaVO = new personaVO();
+ historialVO historialVO = new historialVO();
+ prioridadVO prioridadVO = new prioridadVO();
+ documentoDAO documentoDAO = new documentoDAO(con);
+ personaDAO personaDAO = new personaDAO(con);
+ oficinaDAO oficinaDAO = new oficinaDAO(con);
+ historialDAO historialDAO = new historialDAO(con);
+ Gson json = new Gson();
+ String gson;
+ PrintWriter out;
 
-  public ControladorDocumento() throws Exception {
-    this.documentoDAO = new documentoDAO(cn.conectar());
-    this.personaDAO = new personaDAO(cn.conectar());
-    this.oficinaDAO = new oficinaDAO(cn.conectar());
+ public ControladorDocumento() throws Exception {
+  this.documentoDAO = new documentoDAO(cn.conectar());
+  this.personaDAO = new personaDAO(cn.conectar());
+  this.oficinaDAO = new oficinaDAO(cn.conectar());
+  this.historialDAO = new historialDAO(cn.conectar());
+ }
+
+ protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException, Exception {
+  response.setContentType("application/json");
+  String path = request.getParameter("path");
+  switch (path) {
+   case "/seleccionarRemitente":
+    seleccionarRemitente(request, response);
+    break;
+   case "/seleccionarOficina":
+    seleccionarOficina(request, response);
+    break;
+   case "/seleccionarDestinatario":
+    seleccionarDestinatario(request, response);
+    break;
+   case "/seleccionarDocumento":
+    seleccionarDocumento(request, response);
+    break;
+   case "/radicarDocumento":
+    radicarDocumento(request, response);
+    break;
+   case "/radicarRespuesta":
+    radicarRespuesta(request, response);
+    break;
+   default:
+    throw new AssertionError();
   }
+  out = response.getWriter();
+  out.print(gson);
+  out.flush();
+ }
 
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException, Exception {
-    response.setContentType("application/json");
-    String path = request.getParameter("path");
-    switch (path) {
-      case "/seleccionarRemitente":
-        seleccionarRemitente(request, response);
-        break;
-      case "/seleccionarOficina":
-        seleccionarOficina(request, response);
-        break;
-      case "/seleccionarDestinatario":
-        seleccionarDestinatario(request, response);
-        break;
-      case "/seleccionarDocumento":
-        seleccionarDocumento(request, response);
-        break;
-      case "/radicarDocumento":
-        radicarDocumento(request, response);
-        break;
-      default:
-        throw new AssertionError();
-    }
-    out = response.getWriter();
-    out.print(gson);
-    out.flush();
-  }
-
-  public void seleccionarRemitente(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException, Exception {
+ public void seleccionarRemitente(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException, Exception {
   personaVO persona = new personaVO();
-    String id = request.getParameter("idRemitente");
-    List lista = null;
-    try {
-      persona = personaDAO.listar1Persona(id);
-      gson = json.toJson(persona);
-    } catch (Exception ex) {
-      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  String id = request.getParameter("idRemitente");
+  List lista = null;
+  try {
+   persona = personaDAO.listar1Persona(id);
+   gson = json.toJson(persona);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }
+ }
 
-  public void seleccionarOficina(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException, Exception {
-    String id = request.getParameter("idOficina");
-    try {
-      oficinaVO = oficinaDAO.listar1Oficina(id);
-      gson = json.toJson(oficinaVO);
-    } catch (Exception ex) {
-      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
-    }
+ public void seleccionarOficina(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException, Exception {
+  String id = request.getParameter("idOficina");
+  try {
+   oficinaVO = oficinaDAO.listar1Oficina(id);
+   gson = json.toJson(oficinaVO);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }
+ }
 
-  public void seleccionarDestinatario(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException, Exception {
+ public void seleccionarDestinatario(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException, Exception {
   personaVO persona = new personaVO();
-    String id = request.getParameter("idDestinatario");
-    List lista = null;
-    try {
-      persona = personaDAO.listar1Persona(id);
-      gson = json.toJson(persona);
-    } catch (Exception ex) {
-      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  String id = request.getParameter("idDestinatario");
+  List lista = null;
+  try {
+   persona = personaDAO.listar1Persona(id);
+   gson = json.toJson(persona);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }
+ }
 
-  public void seleccionarDocumento(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException, Exception {
-    String acceso = "";
-    String vistaDoc = "vistaDocumento.jsp";
-    int id = Integer.parseInt(request.getParameter("idDocumento"));
-    request.setAttribute("id", request.getParameter("idDocumento"));
-    request.setAttribute("IdOficina", request.getParameter("idDocumento"));
-    acceso = vistaDoc;
-    try {
+ public void seleccionarDocumento(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException, Exception {
+  String acceso = "";
+  String vistaDoc = "vistaDocumento.jsp";
+  int id = Integer.parseInt(request.getParameter("idDocumento"));
+  request.setAttribute("id", request.getParameter("idDocumento"));
+  request.setAttribute("IdOficina", request.getParameter("idDocumento"));
+  acceso = vistaDoc;
+  try {
 //   gson = json.toJson(id);
-    } catch (Exception ex) {
-      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    RequestDispatcher vista = request.getRequestDispatcher(acceso);
-    vista.forward(request, response);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }
+  RequestDispatcher vista = request.getRequestDispatcher(acceso);
+  vista.forward(request, response);
+ }
 
-  public void radicarDocumento(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    HttpSession misession = (HttpSession) request.getSession();
-    usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
-    InputStream inputStream = null;
-    try {
-      Part filePart = request.getPart("documento");
-      if (filePart.getSize() > 0) {
-        System.out.println(filePart.getName());
-        System.out.println(filePart.getSize());
-        System.out.println(filePart.getContentType());
-        inputStream = filePart.getInputStream();
-      }
-    } catch (Exception ex) {
-      System.out.println("documento: " + ex.getMessage());
-    }
-    String remitente = request.getParameter("idRemitente");
-    int idoficina = Integer.parseInt(request.getParameter("idOficina"));
-    String destinatario = request.getParameter("idDestinatario");
-    int prioridad = Integer.parseInt(request.getParameter("cboPrioridad"));
-    int idtipodocumento = Integer.parseInt(request.getParameter("cboTipoDocumento"));
-    String idRecepcionista = usuario.getNumeroIdentificacion();
-
-//    personaVO.setNumeroIdentificacion(remitente);
-//    documentoVO.setIdRemitente(personaVO);
-
-    tipoDocumentoVO.setIdtipoDocumento(idtipodocumento);
-    documentoVO.setIdtipoDocumento(tipoDocumentoVO);
-
-//    personaVO.setNumeroIdentificacion(destinatario);
-//    documentoVO.setIdDestinatario(personaVO);
-//
-//    personaVO.setNumeroIdentificacion(idRecepcionista);
-//    documentoVO.setIdRecepcionista(personaVO);
-
-    oficinaVO.setIdOficina(idoficina);
-    documentoVO.setIdOficina(oficinaVO);
-
-    prioridadVO.setIdPrioridad(prioridad);
-    documentoVO.setIdPrioridad(prioridadVO);
-    if (inputStream != null) {
-      documentoVO.setDocumentoPDF(inputStream);
-    }
-    try {
-      documentoDAO.radicarDocumento(documentoVO,destinatario,remitente,idRecepcionista);
-    } catch (Exception ex) {
-      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
-    }
+ public void radicarDocumento(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  boolean resultado;
+  HttpSession misession = (HttpSession) request.getSession();
+  usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
+  InputStream inputStream = null;
+  try {
+   Part filePart = request.getPart("documento");
+   if (filePart.getSize() > 0) {
+    System.out.println(filePart.getName());
+    System.out.println(filePart.getSize());
+    System.out.println(filePart.getContentType());
+    inputStream = filePart.getInputStream();
+   }
+  } catch (Exception ex) {
+   System.out.println("documento: " + ex.getMessage());
   }
-
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    try {
-      processRequest(request, response);
-    } catch (Exception ex) {
-      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  String remitente = request.getParameter("idRemitente");
+  int idoficina = Integer.parseInt(request.getParameter("idOficina"));
+  String destinatario = request.getParameter("idDestinatario");
+  int prioridad = Integer.parseInt(request.getParameter("cboPrioridad"));
+  int idtipodocumento = Integer.parseInt(request.getParameter("cboTipoDocumento"));
+  String idRecepcionista = usuario.getNumeroIdentificacion();
+  tipoDocumentoVO.setIdtipoDocumento(idtipodocumento);
+  documentoVO.setIdtipoDocumento(tipoDocumentoVO);
+  oficinaVO.setIdOficina(idoficina);
+  documentoVO.setIdOficina(oficinaVO);
+  prioridadVO.setIdPrioridad(prioridad);
+  documentoVO.setIdPrioridad(prioridadVO);
+  if (inputStream != null) {
+   documentoVO.setDocumentoPDF(inputStream);
   }
-
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    try {
-      processRequest(request, response);
-    } catch (Exception ex) {
-      Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  try {
+   resultado = documentoDAO.radicarDocumento(documentoVO, destinatario, remitente, idRecepcionista);
+   gson = json.toJson(resultado);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
   }
+ }
 
-  @Override
-  public String getServletInfo() {
-    return "Short description";
+ public void radicarRespuesta(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  boolean resultado;
+  HttpSession misession = (HttpSession) request.getSession();
+  usuarioVO usuario = (usuarioVO) misession.getAttribute("usuarioVO");
+  InputStream inputStream = null;
+  try {
+   Part filePart = request.getPart("documento");
+   if (filePart.getSize() > 0) {
+    System.out.println(filePart.getName());
+    System.out.println(filePart.getSize());
+    System.out.println(filePart.getContentType());
+    inputStream = filePart.getInputStream();
+   }
+  } catch (Exception ex) {
+   System.out.println("documento: " + ex.getMessage());
   }
+  int idDocumento = Integer.parseInt(request.getParameter("idDocumento"));
+  String idDestinatario = usuario.getNumeroIdentificacion();
+  String respuestaComen = request.getParameter("respuestaComen");
+  historialVO.setRespuestaComen(respuestaComen);
+  if (inputStream != null) {
+   historialVO.setRespuestaPDF(inputStream);
+  }
+  try {
+   resultado = historialDAO.radicarRespuesta(historialVO, idDocumento, idDestinatario);
+   gson =json.toJson(resultado);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
+  }
+ }
+
+ @Override
+ protected void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  try {
+   processRequest(request, response);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
+  }
+ }
+
+ @Override
+ protected void doPost(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+  try {
+   processRequest(request, response);
+  } catch (Exception ex) {
+   Logger.getLogger(ControladorDocumento.class.getName()).log(Level.SEVERE, null, ex);
+  }
+ }
+
+ @Override
+ public String getServletInfo() {
+  return "Short description";
+ }
 
 }

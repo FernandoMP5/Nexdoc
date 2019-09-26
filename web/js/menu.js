@@ -14,12 +14,12 @@ $(document).ready(function () {
   }
  });
 //Modal
- $(".modal-content div").click(function (e) {
-  if ($(".modal-content div").attr('class') === 'modal-header prueba') {
-   $(".modal-content div").removeClass('prueba').addClass('cancel');
+ $("div #prueba").click(function (e) {
+  if ($("div #prueba").attr('class') === 'prueba') {
+   $("div #prueba").removeClass('prueba').addClass('cancel');
    $(".modal").animate({'margin-top': '18%'});
   } else {
-   $(".modal-content div").removeClass('cancel').addClass('prueba');
+   $("div #prueba").removeClass('cancel').addClass('prueba');
    $(".modal").animate({'margin-top': '0%'});
   }
  });

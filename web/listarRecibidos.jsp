@@ -26,8 +26,8 @@
   <div id="recibidos">
    <form>
     <h1 style="text-align: center">Recibidos</h1><br>
-    <table class="table table-hover table-striped">
-     <thead>
+    <table class="table table-hover">
+     <thead class="thead-dark">
       <tr>
        <th scope="col">Tipo Documento</th>
        <th scope="col">Remitente</th>
@@ -69,6 +69,7 @@
    </form>
   </div>
   <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+  <script src="js/bootstrap.js" type="text/javascript"></script>
   <script src="js/MyScript.js" type="text/javascript"></script>
  </body>
 </html>

@@ -14,12 +14,12 @@ public class personaVO {
   private int rol;
   private String usuario;
   private String clave;
-  private int oficina;
+  private oficinaVO oficina;
 
   public personaVO() {
   }
 
-  public personaVO(String numeroIdentificacion, int tipoIdentificacion, String nombre, String apellido, String correo, Double telefonoFijo, Double telefonoCelular, String direccion, int rol, String usuario, String clave, int oficina) {
+  public personaVO(String numeroIdentificacion, int tipoIdentificacion, String nombre, String apellido, String correo, Double telefonoFijo, Double telefonoCelular, String direccion, int rol, String usuario, String clave, oficinaVO oficina) {
     this.numeroIdentificacion = numeroIdentificacion;
     this.tipoIdentificacion = tipoIdentificacion;
     this.nombre = nombre;
@@ -122,11 +122,11 @@ public class personaVO {
     this.clave = clave;
   }
 
-  public int getOficina() {
+  public oficinaVO getOficina() {
     return oficina;
   }
 
-  public void setOficina(int oficina) {
+  public void setOficina(oficinaVO oficina) {
     this.oficina = oficina;
   }
 

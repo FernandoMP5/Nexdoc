@@ -3,6 +3,7 @@
     Created on : 8/09/2019, 12:09:52 AM
     Author     : Familia Moreno
 --%>
+<%@page import="co.edu.sena.Nexdoc.persistencia.vo.usuarioVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.personaVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.vo.documentoVO"%>
 <%@page import="co.edu.sena.Nexdoc.persistencia.dao.documentoDAO"%>
@@ -24,8 +25,8 @@
   <div id="enviados">
    <form action="ControladorDocumento" method="post">
     <h1 style="text-align: center">Enviados</h1><br>
-    <table class="table table-hover table-striped">
-     <thead>
+    <table class="table table-hover">
+     <thead class="thead-dark">
       <tr>
        <th scope="col">Tipo Documento</th>
        <th scope="col">Destinatario</th>

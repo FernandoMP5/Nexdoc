@@ -1,173 +1,173 @@
 *{
-  margin: 0px;
-  padding: 0px;
-  font-size: 13px;
+ margin: 0px;
+ padding: 0px;
+ font-size: 13px;
 }
 
 body{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+ display: flex;
+ flex-direction: column;
+ width: 100%;
 }
 .btn-warning{
-  background-color: rgb(260,180,20);
-  border-color: rgb(260,180,20);
+ background-color: rgb(260,180,20);
+ border-color: rgb(260,180,20);
 }
 .error{
-  color:red;
-  font-size: 10px;
+ color:red;
+ font-size: 10px;
 }
 .form-group{
  width: 300px;
 }
 /*---------------------------------- Menu ----------------------------------*/
 .navegacion{
-  width: 100%;
+ width: 100%;
 }
 
 .navegacion nav{
-  width: 80%;
-  max-width: 270px;
-  margin: 0px;	
-  background-color: #fff;
+ width: 80%;
+ max-width: 270px;
+ margin: 0px;	
+ background-color: #fff;
 }
 
 .menu{
-  list-style: none;
-  width: 100%;
+ list-style: none;
+ width: 100%;
 }
 
 .menu li{
-  display: inline-block;
+ display: inline-block;
 }
 
 .menu li a{
-  display: block;
-  padding: 15px;
-  color: #000;
-  text-decoration: none;
+ display: block;
+ padding: 15px;
+ color: #000;
+ text-decoration: none;
 }
 
 .menu li a:hover{
-  background-color: rgb(260,180,20);
+ background-color: rgb(260,180,20);
 }
 
 @media screen and (max-width: 2000px){
-  .navegacion nav{
-    position: absolute;
-    left: -13%;
-    width: 25%;
-    height: 85vh;
-    display: block;
-    border-right: 1px solid rgba(0,0,0,0.1);
-  }
-  .menu li{
-    display: block;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
+ .navegacion nav{
+  position: absolute;
+  left: -13%;
+  width: 25%;
+  height: 89vh;
+  display: block;
+  border-right: 1px solid rgba(0,0,0,0.1);
+ }
+ .menu li{
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+ }
 }
 /*---------------------------------- Login ----------------------------------*/
 
 .Login nav{
-  width: 100%;
-  max-width: 100%;
-  float: right;
+ width: 100%;
+ max-width: 100%;
+ float: right;
 }
 
 .Login nav ul{
-  list-style: none;
-  position: relative;
+ list-style: none;
+ position: relative;
 }
 
 .Login nav > ul > li{
-  display: inline-block;
-  width: 180px;
-  text-align: center;
-  float: right;
-  margin-top:15px;
+ display: inline-block;
+ width: 180px;
+ text-align: center;
+ float: right;
+ margin-top:15px;
 }
 
 .Login nav > ul > li > a{
-  color: #000;
-  text-decoration: none;
-  display: block;
-  font-size:13px;
+ color: #000;
+ text-decoration: none;
+ display: block;
+ font-size:13px;
 }
 .Login nav ul li .submenu{
-  background: #fff;
-  position: absolute;
-  display: none;
-  -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.24);
-  -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.24);
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.24);
-  padding: 0px;
+ background: #fff;
+ position: absolute;
+ display: none;
+ -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.24);
+ -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.24);
+ box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.24);
+ padding: 0px;
 }
 
 .Login nav ul li:hover .submenu{
-  display: flex;
-  margin-left: 15px;
-  margin-top: 30px;
-  text-align: center;
+ display: flex;
+ margin-left: 15px;
+ margin-top: 30px;
+ text-align: center;
 }
 
 .Login nav ul li .submenu .submenu-items{
-  margin: 0 5px;
-  padding: 0%;
-  width: 170px;
-  text-align: center;
+ margin: 0 5px;
+ padding: 0%;
+ width: 170px;
+ text-align: center;
 }
 
 .Login nav ul li .submenu .submenu-items p{
-  display: block;
-  border-bottom: 1px solid #565656;
-  margin: 10%;
+ display: block;
+ border-bottom: 1px solid #565656;
+ margin: 10%;
 }
 
 .Login nav ul li .submenu .submenu-items a{
-  color: #000;
-  text-decoration: none;
-  padding: 5px;
-  display: block;
-  height: 35px;
-  margin: 5px;
+ color: #000;
+ text-decoration: none;
+ padding: 5px;
+ display: block;
+ height: 35px;
+ margin: 5px;
 }
 .Login nav ul li .submenu .submenu-items a:hover{
-  background: rgba(0,0,0,0.1);
+ background: rgba(0,0,0,0.1);
 }
 div.Login{
-  border-bottom: 1px solid rgba(0,0,0,0.2);
-  padding-right: 2%;
+ border-bottom: 1px solid rgba(0,0,0,0.2);
+ padding-right: 2%;
 }
 .Login img.login{
-  float: left;
-  width: 20px;
-  height: 20px;
+ float: left;
+ width: 20px;
+ height: 20px;
 }
 div.pie{
-  background-color: rgba(0,0,0,0.9);
-  width: 100%;
-  color: white;
-  margin: 0px;
+ background-color: rgba(0,0,0,0.9);
+ width: 100%;
+ color: white;
+ margin: 0px;
 }
 #contenido{
-  width: 95%;
-  height: 84vh;
-  margin-left: 4%;
-  margin-top: 10px;
+ width: 95%;
+ height: 84vh;
+ margin-left: 4%;
+ margin-top: 10px;
 }
 a{
-  cursor: pointer;
+ cursor: pointer;
 }
 .icono{
-  width: 33px;
-  height: 33px;
-  float: right;
-  margin-top: -6px;
-  margin-right: -0%;
+ width: 33px;
+ height: 33px;
+ float: right;
+ margin-top: -6px;
+ margin-right: -0%;
 }
 #encabezado{
-  width:240px;
-  height:100px;
-  padding: 3px;
-  margin-bottom: -13px;
+ width:240px;
+ height:100px;
+ padding: 3px;
+ margin-bottom: -13px;
 }
